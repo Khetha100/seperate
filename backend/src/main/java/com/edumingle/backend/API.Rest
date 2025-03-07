@@ -1,0 +1,332 @@
+# AUTH CONTROLLER ENDPOINTS
+
+# Registers a new teacher with the provided details including saceNumber
+POST http://localhost:8080/api/v1/auth/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Denzel",
+  "lastName": "Curry",
+  "phone": "6666666666",
+  "saceNumber": "6755",
+  "password": "666666",
+  "role": "TEACHER"
+}
+
+#####
+
+# Registers a new student with the provided details
+POST http://localhost:8080/api/v1/auth/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+  "firstName": "Maboku",
+  "lastName": "Surname",
+  "phone": "1111111111",
+  "password": "123456",
+  "role": "STUDENT"
+}
+
+#####
+
+# Logs in a user whether student or teacher with phone and password.
+POST http://localhost:8080/api/v1/auth/signin
+Content-Type: application/json
+Accept: application/json
+
+{
+  "phone": "6666666666",
+  "password": "666666"
+}
+
+#####
+
+# Logs out user
+GET http://localhost:8080/api/v1/auth/signout
+Accept: application/json
+
+#####
+
+# GRADES AND SUBJECTS CONTROLLER ENDPOINTS
+
+# Fetches all of the grades
+GET http://localhost:8080/api/v1/grades
+Accept: application/json
+
+#####
+
+# Fetch a specific grade by Id
+@id = 2
+
+GET http://localhost:8080/api/v1/grades/{{id}}
+Accept: application/json
+
+#####
+
+# Fetch subjects by grade
+@gradeId = 1
+
+GET http://localhost:8080/api/v1/subjects/{{gradeId}}
+Accept: application/json
+
+
+
+# POST CONTROLLER ENDPOINTS
+
+#####
+
+# Get all posts
+GET http://localhost:8080/api/v1/posts
+Accept: application/json
+
+#####
+
+# Create a new post
+POST http://localhost:8080/api/v1/posts
+Content-Type: application/json
+Accept: application/json
+
+{
+  "imageUrl": "",
+  "name": "Maboku Seimela",
+  "description": "Today school was amazing and I learned about Mathematics.",
+  "numberOfLikes": 1000
+}
+
+#####
+@postId = 3
+
+# Delete a post
+DELETE http://localhost:8080/api/v1/posts/{{postId}}
+Accept: application/json
+
+
+###
+@searchValue = new
+# Search a post
+GET http://localhost:8080/api/v1/posts/search?keyword={{searchValue}}
+Accept: application/json
+
+
+# COMMUNITIES CONTROLLER
+
+#####
+
+# Get all communities in the database
+GET http://localhost:8080/api/v1/communities
+Accept: application/json
+
+#####
+
+# Create a new community
+POST http://localhost:8080/api/v1/communities
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Math Merchants",
+  "description": "This group is meant for the grade 4 learners that have a problem with multiplication",
+  "pubOrPriv": "public",
+  "subjectId": 101,
+  "communityPicture": "",
+  "communityMembersNumber": 344,
+  "joined": true
+}
+
+#####
+
+# Update community details
+PUT http://localhost:8080/api/v1/communities/community
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "name": "Mathematics Merchants",
+  "description": "This group is meant for the new grade 5 learners that have a problem with multiplication and addition",
+  "pubOrPriv": "private",
+  "subjectId": 102,
+  "communityPicture": "",
+  "communityMembersNumber": 255,
+  "joined": false
+}
+
+#####
+@communitiesId = 1
+
+# Get a specific community
+GET http://localhost:8080/api/v1/communities/{{communitiesId}}
+Accept: application/json
+
+#####
+
+# Get community members
+@communityId = 2
+
+GET http://localhost:8080/api/v1/communities/members/{{communityId}}
+Accept: application/json
+
+#####
+
+# Add a community member
+POST http://localhost:8080/api/v1/communities/members
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "name": "Maboku",
+  "surname": "Seimela",
+  "bio": "A++ student with his head on his shoulders",
+  "img_url": "",
+  "phone": "0681481174",
+  "password": "123456"
+}
+
+#####
+
+# Get community user role?
+GET http://localhost:8080/api/v1/communities/members
+Accept: application/json
+
+#####
+
+# Delete a community member
+@communityUserRoleId = 1
+
+DELETE http://localhost:8080/api/v1/communities/members/{{communityUserRoleId}}
+Accept: application/json
+
+#####
+@value = "Math Merchants"
+
+# Search functionality for a community
+GET http://localhost:8080/api/v1/communities/search?keyword={{value}}
+Accept: application/json
+
+
+
+# DISCUSSIONS CONTROLLER ENDPOINTS
+
+#####
+
+# Get all discussions
+GET http://localhost:8080/api/v1/discussions
+Accept: application/json
+
+#####
+
+# Get a specific discussion
+@discussion = 1
+
+GET http://localhost:8080/api/v1/discussions/{{discussion}}
+Accept: application/json
+
+#####
+
+# Create a new discussion
+POST http://localhost:8080/api/v1/discussions
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Multiplications Discussion",
+  "description": "The multiplications table is giving the grade 4 learners a problem"
+}
+
+#####
+
+GET http://localhost:8080/api/v1/discussions/search
+Accept: application/json
+
+#####
+
+# Get all comments
+GET http://localhost:8080/api/v1/comments
+Accept: application/json
+
+
+
+# COMMENTS CONTROLLER ENDPOINTS
+
+#####
+
+# Create a new comment
+POST http://localhost:8080/api/v1/comments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "imageUrl": "",
+  "name": "this is my comment",
+  "description": "this is my comments controller"
+}
+
+#####
+@commentId = 2
+
+# Delete a comment
+DELETE http://localhost:8080/api/v1/comments/{{commentId}}
+Accept: application/json
+
+#####
+@profileId = 1
+
+# Update user profile
+PUT http://localhost:8080/api/v1/profile/{{profileId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Ntandoyenkosi",
+  "surname": "Magana",
+  "bio": "A++ student with her head on her shoulders",
+  "img_url": "",
+  "phone": "1174168068",
+  "password": "654321"
+}
+
+
+
+###
+#####
+
+# CONNECTIONS CONTROLLER ENDPOINTS
+
+POST http://localhost:8080/api/v1/connections/connect
+Content-Type: application/json
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/v1/connections/accept
+Content-Type: application/json
+Accept: application/json
+
+###
+
+POST http://localhost:8080/api/v1/connections/reject
+Content-Type: application/json
+Accept: application/json
+
+###
+@userId = variable value
+
+GET http://localhost:8080/api/v1/connections/{{userId}}/connections
+Accept: application/json
+
+# REPORT CONTROLLER ENDPOINTS
+
+#####
+
+POST http://localhost:8080/api/v1/reports
+Content-Type: application/json
+Accept: application/json
+
+{
+  "reportType": "post",
+  "description": "SPAM",
+  "status": "PENDING"
+}

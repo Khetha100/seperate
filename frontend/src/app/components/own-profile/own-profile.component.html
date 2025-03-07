@@ -1,0 +1,268 @@
+<app-inside-nav></app-inside-nav>
+
+<app-inside-nav></app-inside-nav>
+
+<div
+  class="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-3 bg-white shadow-xl rounded-lg text-gray-900 mt-[40px]"
+>
+  <div class="rounded-t-lg h-32 overflow-hidden">
+    <img
+      class="header-img object-cover object-top w-full"
+      src="https://unsplash.com/photos/white-textile-with-black-shadow-MS9Tnh3if1o"
+      alt="Books and a calculator"
+    />
+  </div>
+
+  <!-- Profile Picture -->
+  <div
+    class="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden"
+  >
+    <img
+      class="profile-picture object-cover object-center h-32"
+      [src]="userProfileData?.imageUrl || 'default-img-2.png'"
+      alt=""
+    />
+  </div>
+
+  <!-- Name and Actions -->
+  <div class="text-center flex justify-center gap-2 mt-2">
+    <h2 class="font-semibold">{{ userProfileData?.firstName + " " + userProfileData?.lastName }}</h2>
+    <a [routerLink]="['/edit-own-profile']" class="edit-profile-link">
+      <img
+        class="edit-profile left-228 overflow-visible"
+        width="16"
+        height="16"
+        src="edit-profile.svg"
+      />
+    </a>
+    <img
+      class="share-profile left-228 overflow-visible cursor-pointer"
+      width="14"
+      height="14"
+      src="share1.svg"
+      (click)="copyLinkToProfile()"
+    />
+  </div>
+
+  <!-- Badges Section -->
+  <div
+    class="badges-container text-center flex justify-center gap-2 mt-2 cursor-pointer hover:opacity-75 transition-opacity duration-200"
+    (click)="openBadgesDialog()"
+  >
+    <img
+      class="badges left-228 overflow-visible"
+      width="20"
+      height="20"
+      src="badge.png"
+    />
+    <h1 class="text-gray-300 text-xs">
+      {{ earnedBadges?.length || 0 }} badges
+    </h1>
+  </div>
+
+  <!-- Stats -->
+  <div class="below-bio-container m-4">
+    <ul
+      class="py-4 text-xs mb-4 m-3 mt-2 text-gray-700 flex items-center justify-around"
+    >
+      <li class="flex ml-2 flex-col items-center justify-between">
+            <h2>{{ userProfileData?.connections?.length || 0 }}</h2>
+        <div>Connections</div>
+      </li>
+      <div class="line mb-4 ml-2"></div>
+
+      <li
+        class="flex flex-col mr-3 items-center justify-between cursor-pointer"
+        (click)="goToCommunities()"
+      >
+          <h1>{{ userProfileData?.communities?.length || 0 }}</h1>
+        <div>Communities</div>
+      </li>
+      <div class="line mb-4"></div>
+
+      <li class="flex mr-8 flex-col items-center justify-between">
+          <h2>{{ userProfileData?.posts?.length || 0 }}</h2>
+        <div>Posts</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="badges-container text-center flex justify-center gap-2 mt-2">
+    <!-- <img
+      class="badges left-228 overflow-visible"
+      width="20"
+      height="20"
+      src="badge.png"
+    /> -->
+    <!-- <h1 class="text-gray-300 text-xs">
+      {{ userProfileData?.badges?.length || 0 }} badges
+    </h1> -->
+  </div>
+
+  <!-- this is the bio -->
+  <p class="text-gray-500 text-center text-xs mt-5">
+    {{ userProfileData?.bio || "No bio available." }}
+  </p>
+
+  <!-- below bio where you find the number of connections, posts and communities the student has joined -->
+  <div class="below-bio-container m-4">
+    <!-- <ul
+      class="py-4 text-xs mb-4 m-3 mt-2 text-gray-700 flex items-center justify-around"
+    >
+      <li class="flex ml-2 flex-col items-center justify-between">
+        <h2>{{ userProfileData?.connections?.length || 0 }}</h2>
+        <div>Connections</div>
+      </li>
+    </ul> -->
+    <div class="line mb-4 ml-2"></div>
+
+    <!-- No Posts Message -->
+    <h2 class="no-posts text-gray-500 text-center mt-8">no posts yet</h2>
+
+    <!-- Toast Message -->
+    <div
+      *ngIf="isToastMessageVisible"
+      class="fixed inset-0 flex items-center justify-center z-50"
+    >
+      <div class="bg-[#00967D] text-white px-6 py-3 rounded-lg shadow-lg">
+        {{ toastMessage }}
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div
+      *ngIf="loading"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="spinner"></div>
+    </div>
+
+    <!-- <div>
+      <ul>
+        <li
+          class="flex flex-col mr-3 items-center justify-between"
+          (click)="goToCommunities()"
+        >
+          <h1>{{ userProfileData?.communities?.length || 0 }}</h1>
+          <div>Communities</div>
+        </li>
+        <div class="line mb-4"></div>
+
+        <li class="flex mr-8 flex-col items-center justify-between">
+          <h2>{{ userProfileData?.posts?.length || 0 }}</h2>
+          <div>Posts</div>
+        </li>
+      </ul>
+    </div> -->
+
+    <!-- <h2 class="no-posts text-gray-500 ml-[150px] mt-[100px] align-center">
+    <li class="flex mr-8 flex-col items-center justify-between">
+      <h2>{{ userProfileData?.posts?.length || 0 }}</h2>
+      <div>Posts</div>
+    </li>
+  </ul>
+</div>
+</div>
+
+<h2 class="no-posts text-gray-500 ml-[150px] mt-[100px] align-center">
+  no posts yet
+</h2>
+
+<div
+*ngIf="isToastMessageVisible"
+class="overlay fixed inset-0 bg-gray-900 bg-opacity-50 z-40"
+></div>
+
+<div
+  *ngIf="isToastMessageVisible"
+  class="toast-message bg-opacity-50 items-center top-5 bg-[#00967D] w-80 z-50 absolute text-white px-5 py-2 mr-4 rounded-lg shadow-md"
+>
+  {{ toastMessage }}
+
+</div>
+
+this is the loading spinner -->
+    <div *ngIf="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+    <app-navbar></app-navbar>
+
+    <!-- Profile Header -->
+    <!-- <div
+  class="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-3 bg-white shadow-xl rounded-lg text-gray-900 mt-[40px]"
+>
+  <div class="rounded-t-lg h-32 overflow-hidden">
+    <img
+      class="header-img object-cover object-top w-full"
+      [src]="userProfileData?.coverImage || 'https://images.unsplash.com/photo-1632571401005-458e9d244591?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWF0aGVtYXRpY3N8ZW58MHx8MHx8fDA%3D'"
+      alt="Profile Cover"
+    />
+  </div>
+
+  <div class="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
+    <img
+      class="profile-picture object-cover object-center h-32"
+      [src]="userProfileData?.profileImage || 'images/profileImage.png'"
+      alt="User Profile Image"
+    />
+  </div>
+
+  <div class="text-center flex justify-center gap-2 mt-2">
+    <h2 class="font-semibold">{{ userProfileData?.name || 'User Name' }}</h2>
+    <a [routerLink]="['/edit-own-profile']" class="edit-profile-link">
+      <img class="edit-profile left-228 overflow-visible" width="16" height="16" src="edit-profile.svg" />
+    </a>
+    <img class="share-profile left-228 overflow-visible" width="14" height="14" src="share1.svg" (click)="copyLinkToProfile()" />
+  </div>
+
+  <div class="badges-container text-center flex justify-center gap-2 mt-2">
+    <img class="badges left-228 overflow-visible" width="20" height="20" src="badge.png" />
+    <h1 class="text-gray-300 text-xs">{{ userProfileData?.badges?.length || 0 }} badges</h1>
+  </div> -->
+
+    <!-- User Bio -->
+    <!-- <p class="text-gray-500 text-center text-xs mt-5">
+    {{ userProfileData?.bio || 'No bio available.' }}
+  </p> -->
+
+    <!-- Connections, Communities, Posts -->
+    <!-- <div class="below-bio-container m-4">
+    <ul class="py-4 text-xs mb-4 m-3 mt-2 text-gray-700 flex items-center justify-around">
+      <li class="flex ml-2 flex-col items-center justify-between">
+        <h2>{{ userProfileData?.connections || 0 }}</h2>
+        <div>Connections</div>
+      </li>
+      <div class="line mb-4 ml-2"></div>
+
+      <li class="flex flex-col mr-3 items-center justify-between" (click)="goToCommunities()">
+        <h1>{{ userProfileData?.communities || 0 }}</h1>
+        <div>Communities</div>
+      </li>
+      <div class="line mb-4"></div>
+
+      <li class="flex mr-8 flex-col items-center justify-between">
+        <h2>{{ userProfileData?.posts || 0 }}</h2>
+        <div>Posts</div>
+      </li>
+    </ul>
+  </div>
+</div> -->
+
+    <!-- No Posts Message -->
+    <!-- <h2 *ngIf="userProfileData?.posts === 0" class="no-posts text-gray-500 ml-[150px] mt-[100px] align-center">
+  No posts yet
+</h2> -->
+
+    <!-- Loading Spinner -->
+    <!-- <div *ngIf="loading" class="loading-overlay">
+  <div class="spinner"></div>
+</div> -->
+    <app-badges-dialog
+      *ngIf="showBadgesDialog"
+      [badge]="badge"
+      (close)="closeBadgesDialog()"
+    ></app-badges-dialog>
+  </div>
+</div>
+
+<app-navbar></app-navbar>
