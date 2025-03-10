@@ -8,37 +8,44 @@ import com.admin.server.models.AdminUser;
 import com.admin.server.repositories.AdminProfileRepository;
 import com.admin.server.repositories.AdminUserRepository;
 import com.admin.server.services.AdminUserService;
-import com.edumingle.backend.models.CommunityUserRole;
 import com.edumingle.backend.models.UserInfo;
 import com.edumingle.backend.repositories.CommunityUserRoleRepository;
+import com.edumingle.backend.repositories.DiscussionRepository;
+import com.edumingle.backend.repositories.MessageRepository;
 import com.edumingle.backend.repositories.UserInfoRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
     private final AdminUserRepository adminUserRepository;
     private final AdminProfileRepository adminProfileRepository;
     private final UserInfoRepository userInfoRepository;
     private final CommunityUserRoleRepository communityUserRoleRepository;
+    private final DiscussionRepository discussionRepository;
+    private final MessageRepository messageRepository;
 
     @Autowired
     public AdminUserServiceImpl(
             AdminUserRepository adminUserRepository,
             AdminProfileRepository adminProfileRepository,
-            UserInfoRepository userInfoRepository,
-            CommunityUserRoleRepository communityUserRoleRepository) {
+            UserInfoRepository userInfoRepository, CommunityUserRoleRepository communityUserRoleRepository,
+            DiscussionRepository discussionRepository, MessageRepository messageRepository) {
         this.adminUserRepository = adminUserRepository;
         this.adminProfileRepository = adminProfileRepository;
         this.userInfoRepository = userInfoRepository;
         this.communityUserRoleRepository = communityUserRoleRepository;
+        this.discussionRepository = discussionRepository;
+        this.messageRepository = messageRepository;
     }
 
     @Override
@@ -152,7 +159,10 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     public UserDeleteDTO permanentDelete(int userId){
-//        communityUserRoleRepository
+        messageRepository.deleteBySenderId(userId);
+        discussionRepository.deleteByUserInfoId(userId);
+        communityUserRoleRepository.deleteByUserInfoId(userId);
+        userInfoRepository.deleteById(userId);
         if(userInfoRepository.findById(userId).orElse(null) == null){
             return new UserDeleteDTO(HttpStatus.OK,"User deleted successfully");
         }

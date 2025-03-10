@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface ReportRepository extends JpaRepository<Reports, Long> {
     // You can define custom queries if needed
+    void deleteByPostId(Long postId);
 }
 
 //@Repository

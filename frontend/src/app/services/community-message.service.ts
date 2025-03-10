@@ -16,7 +16,8 @@ export class CommunityMessageService {
   ) {
    }
 
-  deleteMessage(clickedMessageId:number):Observable<any>{
+  deleteMessage(clickedMessageId: number): Observable<any>{
+    console.log("at delete message method");
     return this.http.delete<any>(this.apiUrl + '/community/discussions/' + this.communityService.clickedDiscussionId + '/messages/'+clickedMessageId);
   }
 

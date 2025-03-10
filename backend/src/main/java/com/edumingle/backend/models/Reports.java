@@ -1,5 +1,6 @@
 package com.edumingle.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.message.Message;
 @Entity
 public class Reports {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,29 +26,23 @@ public class Reports {
     private LocalDateTime createdAt;
     private LocalDateTime reviewedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private UserInfo user;  // User who created the report
+//    @ManyToOne
+//    @JoinColumn(name = "userId")
+//    private UserInfo user;
 
-    @ManyToOne
-    @JoinColumn(name = "postId")
-    private Post post;
-    
-    @ManyToOne
-    @JoinColumn(name = "commentId")
-    private Comments comment;
+    private int userId;
 
-    @ManyToOne
-    @JoinColumn(name="message_id")
-    private CommunityMessage communityMessage;
+//    @ManyToOne
+//    @JoinColumn(name = "postId")
+//    private Post post;
 
-    @ManyToOne
-    @JoinColumn(name="community_id")
-    private Community community;
+    private int postId;
 
     @Enumerated(EnumType.STRING)
     private ReportStatus status;
 
-
-
+    // Add a setter for userId to allow setting UserInfo from frontend data
+//    public void setUserId(UserInfo userInfo) {
+//        this.user = userInfo;
+//    }
 }

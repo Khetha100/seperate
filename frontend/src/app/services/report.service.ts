@@ -6,15 +6,17 @@ import { ReportData } from '../types/reportData.interface';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportService {
-    private apiUrl = environment.SERVER + '/api/v1'; 
-  
+  private apiUrl = environment.SERVER + '/api/v1';
 
-  constructor(private http: HttpClient) { }
+  reportPostId: number = 0;
+
+  constructor(private http: HttpClient) {}
 
   submitReport(report: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reports`, report, {responseType: 'text'});
+    // return this.http.post(`${this.apiUrl}/reports`, report, {responseType: 'text'});
+    return this.http.post(`${this.apiUrl}/reports/` + report.userId+"/"+report.postId, report);
   }
 }

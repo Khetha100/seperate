@@ -22,6 +22,7 @@ export class DonationsComponent implements OnInit {
   getDonations() {
     this.adminService.getDonations().subscribe(
       (data) => {
+        console.log(data)
         this.donations = data;
       },
       (error) => {

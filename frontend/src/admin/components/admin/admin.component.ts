@@ -12,36 +12,15 @@ import { Dashboard } from '../../types/dashboard.interface';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  dashboardData: Dashboard = {
-    reportedContent: 0,
-      totalCommunities: [],
-    totalDonations: [],
-      totalUsers: []
-  };
 
-  constructor(private adminService: AdminService) {}
+
+  constructor(public adminService: AdminService) {}
 
   ngOnInit() {
-    this.getDashboardData();
+    this.adminService.getDashboardDataForComponents();
   }
 
-  getDashboardData() {
-    this.adminService.getDashboardData().subscribe(
-      (data) => {
-        console.log(data);
-        this.dashboardData = data;
-      },
-      (error) => {
-        console.error("Error fetching dashboard data:", error);
-      }
-    );
-  }
 
-  sumTotalDonations(): number{
-    let sumDonation = 0;
-    this.dashboardData.totalDonations.forEach(element => {
-      sumDonation += element.amount;
-    });
-    return sumDonation;
-  }
+
+
 }

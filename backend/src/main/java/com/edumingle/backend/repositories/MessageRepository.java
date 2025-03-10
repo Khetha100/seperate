@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<CommunityMessage, Integer> {
     List<CommunityMessage> findAByDiscussionId(int communityId);
+    void deleteByDiscussionId(int id);
+    void deleteBySenderId(int id);
 
 }

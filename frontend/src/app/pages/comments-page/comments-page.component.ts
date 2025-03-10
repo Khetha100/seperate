@@ -8,6 +8,8 @@ import { AddContentService } from '../../services/add-content.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as uuid from 'uuid';
 import { CommentsInterface } from '../../types/comments.interface';
+import { User } from '../../types/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-comments-page',
@@ -22,7 +24,8 @@ export class CommentsPageComponent {
     private formBuilder: FormBuilder,
     private commentsService: CommentsService,
     private addContentService: AddContentService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public authService:AuthService
   ) {
     this.commentForm = this.formBuilder.group({
       commentContent: [''],
@@ -35,7 +38,19 @@ export class CommentsPageComponent {
       console.log(data);
       this.comment = data;
     });
+    this.authService.getUserById(Number(localStorage.getItem('id'))).subscribe((user) => {
+      console.log(user);
+      this.authService.userData = user;
+    });
   }
+
+  // userId!: number;
+    receiverId: number = 0;
+    receiverName: string = "";
+  
+    user: User | null = null;
+  
+    userProfileData: any = null;
 
   isIconActive: boolean = false;
   location: any;
@@ -56,7 +71,8 @@ export class CommentsPageComponent {
 
     const commentsInterface: CommentsInterface = {
       // id: number,
-      name: 'Sino Fipaza',
+      name: this.authService.userData.firstName +
+      ' ' +this.authService.userData.lastName,
       description: newComment,
       numberOfLikes: 0,
       date: new Date(),

@@ -54,8 +54,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = session.getAttribute("USER_ID").toString();
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -75,8 +74,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("USER_ID").toString();
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -93,8 +91,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("USER_ID");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -111,8 +108,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("USER_ID");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -131,8 +127,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("USER_ID").toString();
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -150,8 +145,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("USER_ID").toString();
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -168,8 +162,7 @@ public class CommunityController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = session.getAttribute("USER_ID").toString();
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");

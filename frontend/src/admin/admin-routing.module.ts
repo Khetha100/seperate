@@ -7,7 +7,6 @@ import { ContentComponent } from './components/content/content.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DonationsComponent } from './components/donations/donations.component';
-import { HttpClient } from '@angular/common/http';
 import { UserComponent } from './components/user/user.component';
 
 

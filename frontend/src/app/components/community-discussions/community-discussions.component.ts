@@ -13,7 +13,7 @@ import { InsideNavComponent } from '../inside-nav/inside-nav.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommunityDiscussionsService } from './../../services/community-discussions.service';
 import { CommunityService } from '../../services/community.service';
-import { Notification } from '../../types/notification.interface';
+import { Notifications } from '../../types/notification.interface';
 import { User } from '../../types/user.interface';
 import { AuthService } from '../../services/auth.service';
 import { AddContentService } from '../../services/add-content.service';

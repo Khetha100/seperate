@@ -155,6 +155,7 @@ export class CommunityDiscussionComponent implements OnInit {
   }
 
   deleteMessageClicked(clickedMessageId?: number): void {
+    console.log("About to delete a message with id: "+ clickedMessageId);
     if (clickedMessageId) {
       this.communityMessage.deleteMessage(clickedMessageId).subscribe((res) => {
         console.log(res);

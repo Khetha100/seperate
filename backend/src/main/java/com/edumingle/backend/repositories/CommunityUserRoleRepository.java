@@ -12,7 +12,6 @@ public interface CommunityUserRoleRepository extends JpaRepository<CommunityUser
     List<CommunityUserRole> findByCommunityId(int id);
 
     void  deleteByCommunityId(int id);
-
     void deleteByUserInfoId(int id);
 
 }

@@ -1,5 +1,6 @@
 package com.edumingle.backend.controllers;
 
+import com.admin.server.dtos.DeleteDTO;
 import com.edumingle.backend.dtos.PostDTO;
 import com.edumingle.backend.dtos.SearchDTO;
 import com.edumingle.backend.models.UserInfo;
@@ -32,11 +33,11 @@ public class PostController {
             HttpServletRequest request
     ) {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            UserInfo userId = (UserInfo) session.getAttribute("user");
+//        if (session != null) {
+//            UserInfo userId = (UserInfo) session.getAttribute("user");
 //            System.out.println("Session ID: " + session.getId());
 //            System.out.println("User ID: " + userId);
-        }
+//        }
 
         return ResponseEntity.ok(postService.getPostService());
     }
@@ -57,7 +58,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<String> deletePost(
+    public ResponseEntity<DeleteDTO> deletePost(
             @PathVariable Long postId,
             HttpServletRequest request
     ) {
@@ -69,7 +70,23 @@ public class PostController {
         }
 
         postService.deletePostService(postId);
-        return ResponseEntity.ok("Deleted");
+        return ResponseEntity.ok(new DeleteDTO(HttpStatus.OK, "Success"));
+    }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPost(
+            @PathVariable Long postId,
+            HttpServletRequest request
+    ) {
+//        HttpSession session = request.getSession(false);
+//        if (session != null) {
+//            UserInfo userId = (UserInfo) session.getAttribute("user");
+//            System.out.println("Session ID: " + session.getId());
+//            System.out.println("User ID: " + userId);
+//        }
+
+//        postService.getSinglePostService(Math.toIntExact(postId));
+        return ResponseEntity.ok(postService.getSinglePostService(Math.toIntExact(postId)));
     }
 
     @PostMapping("/search")

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReportService } from '../../services/report.service';
 import { AuthService } from '../../services/auth.service';
-import { ReportReason } from '../../types/reportData.interface';
+import { ReportData, ReportReason } from '../../types/reportData.interface';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -89,12 +89,12 @@ export class ReportPostComponent {
     console.log('Selected Reason:', this.selectedReason);
     console.log('Selected Descriptioon:', this.selectedDescription);
 
-    const reportData = {
+    const reportData:ReportData = {
       reason: this.selectedReason,
-      // userId: this.userId,
-      contentId: contentId,
+      userId: Number(localStorage.getItem('id')),
       description: this.selectedDescription.trim(),
-      createdAt: new Date().toISOString(),
+      createdAt: new Date(),
+      postId:this.reportService.reportPostId,
     };
 
     this.reportService.submitReport(reportData).subscribe(

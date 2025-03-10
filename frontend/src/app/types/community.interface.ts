@@ -1,3 +1,5 @@
+import { User } from "./user.interface";
+
 export interface Community {
   id?: number;
   name: string;
@@ -6,4 +8,5 @@ export interface Community {
   communityPicture: string;
   communityMembersNumber: number;
   communityCreatorId: number;
+  users?: User[];
 }

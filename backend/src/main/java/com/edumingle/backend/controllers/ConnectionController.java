@@ -23,10 +23,6 @@ import com.edumingle.backend.services.impl.ConnectionServiceImpl;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200",
-//        maxAge = 3600,
-//        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
-//        allowCredentials = "true")
 @RequestMapping("/api/v1/connections")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 

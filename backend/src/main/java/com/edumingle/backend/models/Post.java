@@ -22,8 +22,8 @@ public class Post {
     private String description;
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "post")
-    private List<Reports> reports;
+//    @OneToMany(mappedBy = "post")
+//    private List<Reports> reports;
 
     @OneToMany(mappedBy = "post")
     private List<Comments> comments;

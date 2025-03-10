@@ -35,7 +35,9 @@ public class MessageController {
 //        Discussion discussion = discussionRepository.findById(message.getDiscussionId()).orElse(null);
 //        message.setDiscussion(discussion);
         this.simpMessagingTemplate.convertAndSend(message.getSubscriptionChannel(), message);
-        return helloMessageRepository.save(message);
+        CommunityMessage communityMessage = helloMessageRepository.save(message);
+        System.out.println(communityMessage);
+        return communityMessage;
     }
 
 //    @GetMapping("/hellos/{communityId}")

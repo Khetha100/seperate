@@ -7,6 +7,19 @@
   position: sticky;
   padding-left: 25px;
 }
+.eduMingle {
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  height: 192px;
+  position: relative;
+  left: 31px;
+  top: 260px;
+  overflow: hidden;
+  width: 85%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
 .edu-mingle-span {
   color: #00967d;
   font-family: "Poppins-BoldItalic", sans-serif;
@@ -39,7 +52,6 @@
 outline: 2px solid #00bba7;
 border-color: #00bba7;
 padding: 5px;
-
 }
 .search {
   text-align: center;
@@ -77,7 +89,7 @@ padding: 5px;
   font-family: "Poppins-Regular", sans-serif;
   font-size: 14px;
   position: absolute;
-  left: 69px;
+  left: 62px;
   top: 25px;
   width: 250px;
   height: 23px;
@@ -130,7 +142,6 @@ padding: 5px;
   font-size: 12px;
   font-weight: 600;
 }
-
 .catpic {
   width: 95px;
   height: 92px;
@@ -139,13 +150,12 @@ padding: 5px;
   top: 258px;
   object-fit: cover;
 }
-
-.frame-39389 {
+/* .frame-39389 {
 border-radius: 10px;
 border-style: solid;
 border-width: 1px;
-/* height: 297px; */
-/* height: 125px; */
+height: 297px;
+height: 125px;
 position: relative;
 left: 31px;
 top: 260px;
@@ -153,7 +163,7 @@ overflow: hidden;
 width: 85%;
 box-sizing: border-box;
 margin-bottom: 10px;
-}
+} */
 .post-input{
 position: relative;
 left: 31px;
@@ -178,54 +188,6 @@ justify-content: space-between;
 height: 20%;
 margin-bottom: 10px;
 }
-.name {
-color: #000000;
-text-align: left;
-font-family: "Poppins-Regular", sans-serif;
-font-size: 15px;
-font-weight: 400;
-position: absolute;
-left: 65.06px;
-top: 25px;
-font-weight: 550;
-}
-/* .time {
-color:#cecece;
-text-align: left;
-font-family: "Poppins-Regular", sans-serif;
-font-size: 12px;
-font-weight: 400;
-position: absolute;
-left: 69px;
-top: 37px;
-font-weight: 550;
-} */
-.post {
-color: #000000;
-font-family: "Poppins-Regular", sans-serif;
-font-weight: 400;
-font-family: "-", sans-serif;
-font-size: 14px;
-font-weight: 400;
-position: absolute;
-left: 15px;
-top: 59px;
-word-wrap: break-word;
-}
-.eduMingle {
-border-radius: 10px;
-border-style: solid;
-border-width: 1px;
-height: 192px;
-position: relative;
-left: 31px;
-top: 260px;
-overflow: hidden;
-width: 85%;
-box-sizing: border-box;
-margin-bottom: 10px;
-
-}
 .eduimage {
 width: 20px;
 height: 40px;
@@ -236,12 +198,6 @@ transform: translate(-0.03px, 0.03px);
 overflow: visible;
 object-fit: cover;
 border-radius: 50px;
-}
-.hashtags {
-color: #5470ff;
-font-family: "Poppins-SemiBold", sans-serif;
-font-size: 13px;
-font-weight: 600;
 }
 .more {
 width: 20px;
@@ -296,7 +252,7 @@ left: 15px;
 bottom: 10px;
 overflow: visible;
 }
-._10 {
+.likeCount {
 color: #000000;
 text-align: left;
 font-family: "Poppins-Regular", sans-serif;
@@ -314,17 +270,17 @@ left: 18px;
 top: 13px;
 object-fit: cover;
 }
-._25-minutes-ago {
+.time {
 color: #cecece;
 text-align: left;
 font-family: "Poppins-Regular", sans-serif;
 font-size: 10px;
 font-weight: 400;
-position: absolute;
-right: 20px;
-bottom: 13px;
+position: relative;
+left: 289px;
+bottom: 3px;
 }
-._3 {
+.commentCount {
 color: #000000;
 text-align: left;
 font-family: "Poppins-Regular", sans-serif;
@@ -334,52 +290,19 @@ position: absolute;
 left: 103px;
 bottom: 13px;
 }
-.image {
-width: 40px;
-height: 40px;
-position: absolute;
-left: 22.06px;
-top: 14px;
-transform: translate(-0.03px, 0.03px);
-overflow: visible;
-object-fit: cover;
-border-radius: 50px;
-}
-.image {
-border-radius: 25px;
-}
-.spaceUnder {
-color:transparent;
-position: absolute;
-top: 775px;
-}
+
 input {
 outline: none !important;
 }
-.image-21 {
-position: absolute;
-left: 18px;
-top: 130px;
-}
 .iconcamera {
 position: relative;
-top: 79px;
-left: 216px;
+top: 29px;
+left: 213px;
 opacity: 0.6;
 width: 20px;
 height: 20px;
 }
-.iconfile {
-position: relative;
-top: 55px;
-left: 188px;
-opacity: 0.6;
-}
 .imageInput{
-/* background: #00967d; */
-/* border-radius: 10px; */
-/* width: 100%; */
-/* margin-top: 10px; */
 text-align: center;
 border-radius: 5px;
 }
@@ -387,9 +310,9 @@ border-radius: 5px;
 margin-top: 10px;
 width:auto;
 height: 55px;
-position: relative;
-top: 20px;
-left: 70px;
+position: absolute;
+top: 42px;
+left: 68px;
 border-radius: 5px;
 }
 .eduname {
@@ -404,184 +327,11 @@ left: 65.06px;
 top: 23px;
 font-weight: 550;
 }
-.success-snackbar {
-background-color: #00967d;
-color: white;
-}
+
 .error-snackbar {
 --mdc-snackbar-container-color: #00967d;
 --mat-snack-bar-button-color: white;
 }
-
-
-
-
-.eduname {
-  margin-left: 10px;
-  color: #000000;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  position: absolute;
-  left: 65.06px;
-  top: 23px;
-  font-weight: 550;
-}
-.edumingle {
-    font-family: "Poppins-Bold", sans-serif;
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: bold;
-    position: sticky;
-    padding-left: 25px;
-  }
-.edu-mingle-span {
-    color: #00967d;
-    font-family: "Poppins-BoldItalic", sans-serif;
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 700;
-    font-style: italic;
-  }
-.header {
-    display: flex;
-    justify-content: space-between;
-    /* margin-top: 10px; */
-  }
-.searchIcon {
-    width: 28px;
-    height: 28px;
-    position: absolute;
-    left: 288px;
-    top: 20%;
-  }
-.searchInput {
-    background: #f1f1f1;
-    border-radius: 15px;
-    width: 330px;
-    height: 50px;
-    border: none;
-    outline: none;
-}
-.searchInput:focus {
-  outline: 2px solid #00bba7;
-  border-color: #00bba7;
-  padding: 5px;
-
-}
-.search {
-    text-align: center;
-    position: relative;
-    width: 300px;
-    margin-left: 30px;
-    margin-right: 30px;
-
-}
-.searchInput::placeholder {
-    font-size: 15px;
-    padding-left: 15px;
-}
-.postbox {
-    border-radius: 10px;
-    border-style: solid;
-    border-color: #656566 opacity transparent;
-    border-width: 1px;
-    width: 330px;
-    height: 112px;
-    position: absolute;
-    left: 29px;
-    top: 125px;
-  }
-.image {
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    position: absolute;
-    left: 10px;
-    bottom: 12px;
-  }
-.educateInput {
-    color: #656566;
-    font-family: "Poppins-Regular", sans-serif;
-    font-size: 14px;
-    position: absolute;
-    left: 69px;
-    top: 25px;
-    width: 250px;
-    height: 23px;
-  }
-.educatebtn {
-    color: #ffffff;
-    background: #00967d;
-    font-family: "Poppins-Bold", sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    position: absolute;
-    left: 240px;
-    top: 70px;
-    border-radius: 10px;
-    width: 80px;
-    height: 35px;
-    border: none;
-  }
-.communitySection {
-    background: #e0f4f1;
-    border-radius: 10px;
-    width: 330px;
-    height: 112px;
-    position: absolute;
-    left: 32px;
-    top: 249px;
-  }
-  .need-help-ask-your-community {
-    color: #000000;
-    text-align: left;
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    position: absolute;
-    left: 44px;
-    top: 260px;
-  }
-  .ask-now {
-    background: #00967d;
-    border-radius: 10px;
-    width: 72px;
-    height: 31px;
-    position: absolute;
-    left: 44px;
-    top: 315px;
-    border: none;
-    color: #ffffff;
-    text-align: center;
-    font-family: "Poppins-SemiBold", sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .catpic {
-    width: 95px;
-    height: 92px;
-    position: absolute;
-    left: 269px;
-    top: 258px;
-    object-fit: cover;
-  }
-/* .frame-39389 {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  height: 297px;
-  height: 125px;
-  height: auto;
-  position: relative;
-  left: 31px;
-  top: 260px;
-  overflow: hidden;
-  width: 85%;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-} */
 .post-container {
   display: flex;
   flex-direction: column;
@@ -608,147 +358,15 @@ color: white;
   font-weight: 400;
   word-wrap: break-word;
 }
-
-.post-input{
-  position: relative;
-  left: 31px;
-  top: 260px;
-  width: 85%;
-  word-wrap: break-word;
-}
-.ownPost
- {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  height: 150px;
-  position: relative;
-  left: 31px;
-  top: 260px;
-  width: 85%;
-  word-wrap: break-word;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 20%;
-  margin-bottom: 10px;
-}
 .name {
   font-family: "Poppins-Regular", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-  position: absolute;
-  left: 48px;
-  /* top: 25px; */
-  font-weight: 550;
-}
-/* .time {
-  color:#cecece;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  position: absolute;
-  left: 69px;
-  top: 37px;
-  font-weight: 550;
-} */
-
-.eduMingle {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  height: 192px;
-  position: relative;
-  left: 31px;
-  top: 260px;
-  overflow: hidden;
-  width: 85%;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-
-}
-.post {
-  color: #000000;
-  font-family: "Poppins-Regular", sans-serif;
-  font-weight: 400;
-  font-family: "-", sans-serif;
   font-size: 14px;
-  font-weight: 400;
   position: absolute;
-  left: 15px;
-  top: 59px;
-  word-wrap: break-word;
-}
-.eduimage {
-  width: 20px;
-  height: 40px;
-  position: absolute;
-  left: 22.06px;
-  top: 14px;
-  transform: translate(-0.03px, 0.03px);
-  overflow: visible;
-  object-fit: cover;
-  border-radius: 50px;
-}
-.hashtags {
-  color: #5470ff;
-  font-family: "Poppins-SemiBold", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-}
-.more {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 296.06px;
-  top: 23px;
-  overflow: visible;
-}
-.image-18 {
-  position: absolute;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  width: 301px;
-  height: 161px;
-  left: 15px;
-  top: 90px;
-  object-fit: cover;
-}
-.image-19 {
-  position: absolute;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  width: 301px;
-  height: 151px;
-  left: 15px;
-  top: 105px;
-  object-fit: cover;
-}
-.chat {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 75px;
-  bottom: 12px;
-}
-.bookmark {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  left: 145px;
-  top: 254px;
-  overflow: visible;
-}
-.love {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  left: 15px;
-  bottom: 10px;
-  overflow: visible;
+  top: 18px;
+  left: 48px;
+  font-weight: 550;
+  padding-left: 10px;
+  
 }
 ._10 {
   color: #000000;
@@ -758,24 +376,6 @@ color: white;
   font-weight: 400;
   position: absolute;
   left: 43px;
-  bottom: 13px;
-}
-.image-21 {
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  left: 18px;
-  top: 13px;
-  object-fit: cover;
-}
-._25-minutes-ago {
-  color: #cecece;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
-  font-size: 10px;
-  font-weight: 400;
-  position: absolute;
-  right: 20px;
   bottom: 13px;
 }
 ._3 {
@@ -788,40 +388,10 @@ color: white;
   left: 103px;
   bottom: 13px;
 }
-.image {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  left: 22.06px;
-  top: 14px;
-  transform: translate(-0.03px, 0.03px);
-  overflow: visible;
-  object-fit: cover;
-  border-radius: 50px;
-}
-.image {
-  border-radius: 25px;
-}
 .spaceUnder {
   color:transparent;
   position: absolute;
   top: 775px;
-}
-input {
-  outline: none !important;
-}
-.image-21 {
-  position: absolute;
-  left: 18px;
-  top: 130px;
-}
-.iconcamera {
-  position: relative;
-  top: 79px;
-  left: 216px;
-  opacity: 0.6;
-  width: 20px;
-  height: 20px;
 }
 .iconfile {
   position: relative;
@@ -829,40 +399,21 @@ input {
   left: 188px;
   opacity: 0.6;
 }
-.imageInput{
-  /* background: #00967d; */
-  /* border-radius: 10px; */
-  /* width: 100%; */
-  /* margin-top: 10px; */
-  text-align: center;
-  border-radius: 5px;
-}
-.image-preview {
-  margin-top: 10px;
-  width:auto;
-  height: 55px;
+.eduSpan {
   position: relative;
-  top: 20px;
-  left: 70px;
-  border-radius: 5px;
-}
-.eduname {
-  margin-left: 10px;
-  color: #000000;
-  text-align: left;
-  font-family: "Poppins-Regular", sans-serif;
+  top: 55px;
+  left:16px;
   font-size: 15px;
-  font-weight: 400;
-  position: absolute;
-  left: 65.06px;
-  top: 23px;
-  font-weight: 550;
 }
-.success-snackbar {
-  background-color: #00967d;
-  color: white;
-}
-.error-snackbar {
-  --mdc-snackbar-container-color: #00967d;
-  --mat-snack-bar-button-color: white;
+.eduTime {
+position: relative;
+top:60px;
+left:120px ;
+color: #cecece;
+text-align: left;
+font-family: "Poppins-Regular", sans-serif;
+font-size: 10px;
+font-weight: 400;
+left: 289px;
+bottom: 3px;
 }

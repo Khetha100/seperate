@@ -1,15 +1,20 @@
 package com.edumingle.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@ToString(exclude = {"communities"})
 public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +43,12 @@ public class UserInfo {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Badges badges;
 
+//    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private List<Community> communities;
+
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Community> communities;
 
     @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
@@ -60,7 +70,6 @@ public class UserInfo {
     @JoinColumn(name = "reportId")
     private Reports report;
 
-
     //These columns are needed by the admin side
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdAt", nullable = false, updatable = false)
@@ -68,8 +77,6 @@ public class UserInfo {
 
     @Column(name = "isTemporarilyDeleted", nullable = false)
     private boolean isTemporarilyDeleted = false;
-
-
 
     public UserInfo(Integer senderId) {
     }

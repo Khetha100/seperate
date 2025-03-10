@@ -13,7 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @ToString
-public class CommunityUserRole implements Serializable {
+public class
+CommunityUserRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

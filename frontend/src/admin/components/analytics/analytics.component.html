@@ -13,21 +13,21 @@
   <div class="text-center">
     <div class="text-sm font-medium text-gray-600">User Growth</div>
     <div class="text-2xl font-bold text-blue-600">
-      {{ analyticsData?.userGrowth }}
+      {{ this.adminService.getTotalUsers() || 0 }}
     </div>
   </div>
   <div class="text-center">
     <div class="text-sm font-medium text-gray-600">Community Growth</div>
     <div class="text-2xl font-bold text-orange-600">
-      {{ analyticsData?.communityGrowth }}
+      {{ this.adminService.getCommunityNumber() || 0 }}
     </div>
   </div>
-  <div class="text-center pb-4 pt-2">
+  <!-- <div class="text-center pb-4 pt-2">
     <div class="text-sm font-medium text-gray-600">Resource Sharing Rate</div>
     <div class="text-2xl font-bold text-purple-600">
       {{ analyticsData?.resourceSharingRate }}
     </div>
-  </div>
+  </div> -->
 </div>
 
 
@@ -36,8 +36,8 @@
       <div class="grid grid-cols-3 gap-4">
         <div class="text-center">
           <div class="text-sm font-medium text-gray-600">Total Donations</div>
-          <div class="text-2xl font-bold text-green-600">
-            {{ formatAmount(donationSummary?.totalDonations || 0) }}
+          <div class="text-2xl font-bold text-green-600" [id]="donationSummary">
+            R {{ this.adminService.sumTotalDonations() }}
           </div>
         </div>
         <div class="text-center">
@@ -52,7 +52,7 @@
         <div class="text-center">
           <div class="text-sm font-medium text-gray-600">Total Donors</div>
           <div class="text-2xl font-bold text-orange-600">
-            {{ donationSummary?.donorCount || 0 }}
+            {{ this.adminService.getTotalDonors() || 0 }}
           </div>
         </div>
       </div>

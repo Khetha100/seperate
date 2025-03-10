@@ -23,7 +23,14 @@ public class AdminAnalyticsController {
     }
 
     @GetMapping("/userRoles")
-    public ResponseEntity<Map<String, Long>> getUserCountByRole() {
-        return ResponseEntity.ok(adminAnalyticsService.getUserCountByRole());
+    public ResponseEntity<Map<String, Object>> getUserCountByRole() {
+        // Return complete analytics data instead of just user roles
+        return ResponseEntity.ok(adminAnalyticsService.getCompleteAnalyticsData());
+    }
+
+    @GetMapping("/data")
+    public ResponseEntity<Map<String, Object>> getCompleteAnalyticsData() {
+        return ResponseEntity.ok(adminAnalyticsService.getCompleteAnalyticsData());
     }
 }
+

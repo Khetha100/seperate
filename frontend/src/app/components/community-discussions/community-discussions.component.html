@@ -80,7 +80,7 @@
           @if(item.userInfo?.id){ }
           <i
             class="fas fa-trash text-red-600 cursor-pointer ml-[280px] absolute left-[55px]"
-            (click)="onDeleteDiscussion(item.userInfo?.id)"
+            (click)="onDeleteDiscussion(item.id)"
             title="Delete Discussion "
           ></i>
           } @else{

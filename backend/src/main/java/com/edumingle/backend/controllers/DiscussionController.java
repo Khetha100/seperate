@@ -28,14 +28,17 @@ public class DiscussionController {
     }
 
     @GetMapping("/")
+
+
+
+
     public ResponseEntity<List<Discussion>> getAllCreatedDiscussions(
             HttpServletRequest request
     ) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             UserInfo userId = (UserInfo) session.getAttribute("user");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         return ResponseEntity.ok(discussionService.getAllDiscussions());
@@ -51,8 +54,7 @@ public class DiscussionController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             UserInfo userId = (UserInfo) session.getAttribute("user");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
@@ -66,11 +68,11 @@ public class DiscussionController {
             @RequestBody CommunityDiscussionDTO discussion,
             HttpServletRequest request
     ) {
+        System.out.println("ABOUT TO ADD DISCUSSION");
         HttpSession session = request.getSession(false);
         if (session != null) {
             UserInfo userId = (UserInfo) session.getAttribute("user");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         return ResponseEntity.ok(discussionService.addADiscussion(discussion));
@@ -85,8 +87,7 @@ public class DiscussionController {
         HttpSession session = request.getSession(false);
         if (session != null) {
             UserInfo userId = (UserInfo) session.getAttribute("user");
-//            System.out.println("Session ID: " + session.getId());
-//            System.out.println("User ID: " + userId);
+
         }
 
         List<Discussion> discussions = discussionService.searchDiscussions(keyword);
@@ -101,7 +102,8 @@ public class DiscussionController {
 
     @DeleteMapping("/community/discussions/{clickedDiscussionId}/messages/{clickedMessageId}")
     public ResponseEntity<DeleteMessageDTO> deleteMessage(@PathVariable int clickedMessageId, @PathVariable int clickedDiscussionId){
-
+        System.out.println(clickedDiscussionId);
+        System.out.println(clickedMessageId);
         return ResponseEntity.ok(discussionService.deleteDiscussionMessage(clickedMessageId));
     }
 }

@@ -16,9 +16,11 @@ import com.edumingle.backend.repositories.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 @Service
 public class DiscussionServiceImpl implements DiscussionService {
 
@@ -44,7 +46,7 @@ public class DiscussionServiceImpl implements DiscussionService {
     @Override
     public List<Discussion> getAllDiscussionsByCommunityId(int communityId) {
         System.out.println("ABOUT TO GET ALL DISCUSSIONS");
-        Community community = communityRepository.findById(Long.valueOf(communityId)).orElse(null);
+//        Community community = communityRepository.findById(Long.valueOf(communityId)).orElse(null);
         List<Discussion> ls = discussionRepository.findByCommunityId(communityId);
         System.out.println(ls);
         return ls;
@@ -77,6 +79,9 @@ public class DiscussionServiceImpl implements DiscussionService {
     }
 
     public DeleteDiscussionDTO deleteDiscussion(int id){
+        System.out.println("ID IS: ");
+        System.out.println(id);
+        messageRepository.deleteByDiscussionId(id);
         discussionRepository.deleteById(id);
         if(discussionRepository.findById(id).orElse(null) == null){
             return new DeleteDiscussionDTO(HttpStatus.OK, "Discussion deletion successful");

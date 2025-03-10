@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -26,6 +27,12 @@ public class ReportServiceImpl implements ReportService {
         reportRepository.save(report);
         return report;
     }
+
+    @Override
+    public List<Reports> getAllReports() {
+        return reportRepository.findAll();
+    }
+
 
     // @Override
     // public void saveReport(Reports report) {

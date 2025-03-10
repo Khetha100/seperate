@@ -24,4 +24,5 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     //  List<Post> findByCategory(String category);
     void deleteById(@NonNull Long id);
+
 }

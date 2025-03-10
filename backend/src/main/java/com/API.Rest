@@ -326,7 +326,26 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "reportType": "post",
-  "description": "SPAM",
-  "status": "PENDING"
+  "reason": "OffensiveLanguage",
+  "description": "This person swore at me",
+  "status": "PENDING",
+  "user": {
+    "id": 1
+  }
 }
+
+
+###
+# ADMIN CONTROLLER ENDPOINTS
+GET http://localhost:8080/api/admin/content/reported
+Accept: application/json
+
+###
+GET http://localhost:8080/api/admin/content/reported/count
+Accept: application/json
+
+
+###
+# ADMIN DONATIONS CONTROLLER
+GET http://localhost:8080/api/admin/donations
+Accept: application/json

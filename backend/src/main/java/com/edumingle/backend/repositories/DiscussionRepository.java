@@ -20,4 +20,6 @@ public interface DiscussionRepository extends JpaRepository<Discussion, Integer>
 
     void deleteByCommunityId(int id);
 
+    void deleteByUserInfoId(int id);
+
 }

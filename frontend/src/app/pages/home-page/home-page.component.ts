@@ -1,3 +1,4 @@
+import { ReportService } from './../../services/report.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -47,6 +48,7 @@ export class HomePageComponent implements OnInit {
     private addContentService: AddContentService,
     private snackBar: MatSnackBar,
     private comments: CommentsService,
+    public reportService: ReportService,
     public authService:AuthService)
    {
     this.postForm = this.formBuilder.group({
@@ -77,6 +79,7 @@ export class HomePageComponent implements OnInit {
   userProfileData: any = null;
 
   posts: PostInterface[] = [];
+
 
   // userName: string = 'Sino Fipaza';
 
@@ -152,15 +155,17 @@ export class HomePageComponent implements OnInit {
   icon2: string = 'icons/likedHeart.svg';
   clickedPicture: boolean = false;
   likeCount: number = 0;
-
-
+  
+  setClickedUserId(id:number) {
+    this.authService.clickedUserId = id;
+  }
 
   OnClick() {
     this.clickedPicture = !this.clickedPicture;
     this.icon = this.clickedPicture ? this.icon2 : 'icons/heart.svg';
     this.likeCount += this.clickedPicture ? 1 : -1;
     const commentUpdate: CommentsInterface = {
-      name: 'Sino Fipaza',
+      name: '',
       description: 'Liked your post!',
       numberOfLikes: this.likeCount,
       date: new Date(),
@@ -182,5 +187,9 @@ export class HomePageComponent implements OnInit {
     } else {
       return timeDiffrence + 'd';
     }
+  }
+
+  getReoprtedPostId(postId:number) {
+    this.reportService.reportPostId = postId;
   }
 }
