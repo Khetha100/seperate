@@ -1,6 +1,7 @@
 package com.admin.server.services;
 
 import com.admin.server.repositories.AdminAnalyticsRepository;
+import com.edumingle.backend.models.Roles;
 import com.edumingle.backend.models.UserInfo;
 import com.edumingle.backend.repositories.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,11 @@ public class AdminAnalyticsService {
         List<Object[]> results = adminAnalyticsRepository.getUserCountByRole();
         return results.stream()
                 .collect(Collectors.toMap(
-                        row -> (String) row[0],
+                        row -> ((Roles) row[0]).toString(), // Adjust this line
                         row -> (Long) row[1]
                 ));
     }
+
 
     public Map<String, Object> getCompleteAnalyticsData() {
         Map<String, Object> analyticsData = new HashMap<>();

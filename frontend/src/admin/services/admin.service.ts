@@ -124,7 +124,7 @@ export class AdminService {
 
   // Analytics
   getAnalyticsData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/analytics/user-roles`);
+    return this.http.get(`http://localhost:8080/api/admin/analytics/userRoles`);
   }
 
   getNewUsersCount(startDate: string): Observable<number> {
