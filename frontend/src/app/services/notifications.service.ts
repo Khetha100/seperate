@@ -8,12 +8,12 @@ import { Notifications } from '../types/notification.interface';
 })
 export class NotificationsService {
 
-  private apiUrl = 'http://localhost:8080/api/notifications';
+  private apiUrl = 'http://localhost:8080/api/v1/notifications';
 
   constructor(private http: HttpClient) {}
 
-  getNotifications(): Observable<Notifications[]> {
-    return this.http.get<Notifications[]>(this.apiUrl);
+  getNotifications(userId: number): Observable<Notifications[]> {
+    return this.http.get<Notifications[]>(`${this.apiUrl}/${userId}`);
   }
 
   markAsRead(id: number): Observable<any> {

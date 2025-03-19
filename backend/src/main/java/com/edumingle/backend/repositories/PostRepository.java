@@ -18,11 +18,16 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
             "LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Post> searchPosts(@Param("keyword") String keyword);
 
-//    List<Post> findByPostname(String name);
+    @Query(value = "SELECT * FROM post ORDER BY RANDOM() LIMIT 10", nativeQuery = true)
+    List<Post> getAllPostsRandomly();
 
-//    List<Post> findByPostDesc(String description);
+    void deleteById(@NonNull Integer id);
+
+    List<Post> findByUserInfoId(Integer userId);
+
 
     //  List<Post> findByCategory(String category);
     void deleteById(@NonNull Long id);
+
 
 }

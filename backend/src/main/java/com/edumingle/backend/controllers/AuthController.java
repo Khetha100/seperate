@@ -71,8 +71,8 @@ public class AuthController {
             HttpServletRequest request
     ) throws NoSuchAlgorithmException, IOException, InvalidKeySpecException {
         // Convert DTO to Entity
-        System.out.println("ABOUT TO PRINT DTO");
-        System.out.println(dto);
+//        System.out.println("ABOUT TO PRINT DTO");
+//        System.out.println(dto);
         UserInfo userInfo = new UserInfo();
         userInfo.setFirstName(dto.getFirstName());
         userInfo.setLastName(dto.getLastName());
@@ -111,8 +111,8 @@ public class AuthController {
         System.out.println(userLogin);
         signinResponseDTO userInfo = userInfoService.loadUserByUsername(userLogin);
 
-        System.out.println();
-        System.out.println(userInfo);
+//        System.out.println();
+//        System.out.println(userInfo);
 
         if (userInfo.getUserInfo() == null) {
             System.out.println("INSIDE NULL SINCE  WHAT RETURNED FROM DATABASE IS NULL");

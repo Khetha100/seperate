@@ -85,7 +85,9 @@ padding: 5px;
   bottom: 12px;
 }
 .educateInput {
-  color: #656566;
+  border: none;
+  outline: none;
+  /* color: #656566; */
   font-family: "Poppins-Regular", sans-serif;
   font-size: 14px;
   position: absolute;

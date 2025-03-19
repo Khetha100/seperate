@@ -42,7 +42,7 @@ export class UserProfileService {
    if (profile.subjects && profile.subjects.length > 0) {
     formData.append('subjectNames', JSON.stringify(profile.subjects));  
   }
-
     return this.http.put<any>(`${this.apiUrl}/profile`, formData);
   }
+
 }

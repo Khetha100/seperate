@@ -3,6 +3,7 @@ package com.edumingle.backend.controllers;
 import com.edumingle.backend.models.Comments;
 import com.edumingle.backend.models.UserInfo;
 import com.edumingle.backend.services.impl.CommentsServiceImpl;
+import com.edumingle.backend.services.impl.NotificationServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,17 @@ import java.util.List;
 public class CommentsController {
 
     private final CommentsServiceImpl commentsService;
+    private final NotificationServiceImpl notificationsService;
 
     @Autowired
-    public CommentsController(CommentsServiceImpl commentsService) {
+    public CommentsController(CommentsServiceImpl commentsService, NotificationServiceImpl notificationsService) {
         this.commentsService = commentsService;
+        this.notificationsService = notificationsService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Comments>> getAllComments(
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Comments>> getAllCommentsByPostId(
+        @PathVariable int postId,
             HttpServletRequest request
     ){
         HttpSession session = request.getSession(false);
@@ -34,7 +38,7 @@ public class CommentsController {
             System.out.println("Session ID: " + session.getId());
             System.out.println("User ID: " + userId);
         }
-        return ResponseEntity.ok(commentsService.getCommentsService());
+        return ResponseEntity.ok(commentsService.getCommentsService(postId));
     }
 
     @PostMapping
@@ -49,6 +53,7 @@ public class CommentsController {
             System.out.println("Session ID: " + session.getId());
             System.out.println("User ID: " + userId);
         }
+        notificationsService.createNotification(new UserInfo(), "Someone has officially commented.");
         return ResponseEntity.ok(commentsService.addCommentsService(comments));
     }
 

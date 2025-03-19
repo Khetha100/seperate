@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface CommentsService {
-    List<Comments> getCommentsService();
+    List<Comments> getCommentsService(int postId);
 
     Comments addCommentsService(Comments comment);
 

@@ -3,20 +3,33 @@ import { Injectable } from '@angular/core';
 import { PostInterface } from '../types/postInterface.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-  private posts: string[] = [
-    // 'Education is the key to unlocking potential—whether in the classroom or the pool. 🌊📚 #LifelongLearning #MakingWaves',
-  ];
+  // private posts: string[] = [
+  //   // 'Education is the key to unlocking potential—whether in the classroom or the pool. 🌊📚 #LifelongLearning #MakingWaves',
+  // ];
 
   postArray: PostInterface[] = [];
+  posts: PostInterface[] = [];
+
+  postIdToDelete: number = 0;
+  loggedUserId: number = 0;
+
+  reportPostId: number = 0;
 
   apiUrl: string = environment.SERVER;
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+
+  //get any user's
+  getUserPosts(userId: string): Observable<PostInterface[]> {
+    return this.http.get<PostInterface[]>(this.apiUrl + 'api/v1/profile/${userId}/posts')
+  }
 
   getPosts(): Observable<PostInterface[]> {
     return this.http.get<PostInterface[]>(this.apiUrl + '/api/v1/posts');
@@ -41,4 +54,25 @@ export class PostService {
       postInterface
     );
   }
+
+  deleteReportedPost(id: number) {
+    return this.http.delete<void>('http://localhost:8080/api/v1/posts/' + id);
+  }
+
+  setClickedUserId(id: number) {
+    this.authService.clickedUserId = id;
+  }
+
+  setPostIdToDelete(id?: number) {
+    if (id) {
+      this.postIdToDelete = id;
+    }
+  }
+
+  getReoprtedPostId(postId?: number) {
+    if (postId) {
+      this.reportPostId = postId;
+    }
+  }
+
 }

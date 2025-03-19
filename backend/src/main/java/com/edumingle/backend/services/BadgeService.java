@@ -27,24 +27,24 @@ public class BadgeService {
         return badgeRepository.findByUserId(userId);
     }
 
-    @Transactional
-    public Badges awardBadge(Long userId, BadgeDTO badgeDTO) {
-        UserInfo userOptional = userInfoRepository.findById(userId);
-        if (userOptional !=null) {
-            return null; // Handle case if user is not found
-        }
-
-        UserInfo user = userOptional;
-
-        Badges badge = new Badges();
-        badge.setName(badgeDTO.getName());
-        badge.setDescription(badgeDTO.getDescription());
-        badge.setImageUrl(badgeDTO.getImageUrl());
-        badge.setUser(user);  // Set the user for the badge
-
-        // Set the date granted, this is done on persist in the Badge model, but ensure it's done
-        badge.setDateGranted(LocalDateTime.now());
-
-        return badgeRepository.save(badge);  // Save the badge to the repository
-    }
+//    @Transactional
+//    public Badges awardBadge(Long userId, BadgeDTO badgeDTO) {
+//        UserInfo userOptional = userInfoRepository.findById(userId);
+//        if (userOptional !=null) {
+//            return null; // Handle case if user is not found
+//        }
+//
+//        UserInfo user = userOptional;
+//
+//        Badges badge = new Badges();
+//        badge.setName(badgeDTO.getName());
+//        badge.setDescription(badgeDTO.getDescription());
+//        badge.setImageUrl(badgeDTO.getImageUrl());
+//        badge.setUser(user);  // Set the user for the badge
+//
+//        // Set the date granted, this is done on persist in the Badge model, but ensure it's done
+//        badge.setDateGranted(LocalDateTime.now());
+//
+//        return badgeRepository.save(badge);  // Save the badge to the repository
+//    }
 }

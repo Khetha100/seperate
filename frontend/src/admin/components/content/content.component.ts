@@ -85,7 +85,7 @@ export class ContentComponent implements OnInit {
 
   // Fetch the content to review and show preview modal
   reviewContent(id: number) {
-    console.log('Reviewing content with id:', id);
+    // console.log('Reviewing content with id:', id);
     this.adminService.getReportedPost(id).subscribe((res) => {
       console.log(res);
       this.selectedPost = res; // Store the selected post for preview

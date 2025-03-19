@@ -18,8 +18,9 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public List<Comments> getCommentsService() {
-        return commentsRepository.findAll();
+    public List<Comments> getCommentsService(int postId) {
+//        return commentsRepository.findAll();
+        return commentsRepository.findByPostId(postId);
     }
 
     @Override

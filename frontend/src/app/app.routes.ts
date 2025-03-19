@@ -1,4 +1,3 @@
-// import { Path } from './../../node_modules/@angular-devkit/core/src/virtual-fs/path.d';
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { EditOwnProfileComponent } from './components/edit-own-profile/edit-own-profile.component';
@@ -6,7 +5,6 @@ import { OwnProfileComponent } from './components/own-profile/own-profile.compon
 import { CreateCommunityComponent } from './components/create-community/create-community.component';
 import { AllCommunitiesComponent } from './components/all-communities/all-communities.component';
 import { CommunityComponent } from './components/community/community.component';
-// import { CommunityDiscussionComponent } from './components/community-discussion/community-discussion.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
@@ -32,7 +30,6 @@ import { InsideCommunitiesComponent } from './components/inside-communities/insi
 import { CommunityDiscussionsComponent } from './components/community-discussions/community-discussions.component';
 import { CommunityDiscussionComponent } from './components/community-discussion/community-discussion.component';
 import { BadgesComponent } from './components/badges/badges.component';
-import { ProfileManagementComponent } from './components/profile-management/profile-management.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { BadgesDialogComponent } from './components/badges-dialog/badges-dialog.component';
 
@@ -67,10 +64,7 @@ export const routes: Routes = [
     path: 'newCommunity',
     component: NewCommunityComponent,
   },
-  {
-    path: 'profile/edit',
-    component: EditOwnProfileComponent,
-  },
+
   {
     path: 'profile',
     component: OwnProfileComponent,
@@ -153,10 +147,10 @@ export const routes: Routes = [
     path: 'forgotPassword',
     component: ForgotPasswordComponent,
   },
-  {
-    path: 'user/profile',
-    component: UserProfileComponent,
-  },
+  // {
+  //   path: 'profile/:id',
+  //   component: UserProfileComponent,
+  // },
   // {
   //   path: 'about-you',
   //   component: AboutYouQuestionsComponent,
@@ -181,14 +175,14 @@ export const routes: Routes = [
     path: 'profile',
     component: OwnProfileComponent,
   },
-  {
-    path: 'user/profile/:userId', // Viewing another user's profile
-    component: UserProfileComponent,
-  },
+  // {
+  //   path: 'user/profile/:userId', // Viewing another user's profile
+  //   component: UserProfileComponent,
+  // },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'insideCommunities', component: InsideCommunitiesComponent },
   { path: 'communityDiscussions', component: CommunityDiscussionsComponent },
   { path: 'comments', component: CommentsPageComponent },
   { path: 'badges', component: BadgesComponent },
-{path: 'badgePopUp', component: BadgesDialogComponent}
+  { path: 'badgePopUp', component: BadgesDialogComponent}
 ];

@@ -83,6 +83,7 @@ export class AuthService {
   clickedUserId: number = 0;
 
   userData: User = {
+    id: 1,
     firstName: '',
     lastName:'',
     bio: '',
@@ -154,6 +155,10 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/profile/{userId}`);
   }
 
+  getUserProfileById(userId: string): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/api/v1/profiles/${userId}`)
+  }
+
   loadCurrentUser(): void {
     this.http.get<User>('/current-user').subscribe(
       (user) => {
@@ -167,6 +172,10 @@ export class AuthService {
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${userId}`);
+  }
+
+  getAllUserProfiles(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:8080/api/v1/profiles')
   }
 
 }

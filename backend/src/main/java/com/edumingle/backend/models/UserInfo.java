@@ -1,10 +1,10 @@
 package com.edumingle.backend.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +28,11 @@ public class UserInfo {
     private String lastName;
 
     private String bio;
+//
+//    @Getter
+//    @Setter
+//    @Column(name = "image", columnDefinition = "LONGTEXT" , nullable = false)
+    @Lob
     private String imageUrl;
 
     @Column(name = "phoneNumber", nullable = false, unique = true)
@@ -51,24 +56,25 @@ public class UserInfo {
     @JsonIgnore
     private List<Community> communities;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Grades> grades;
 
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Subjects> subjects;
+
+    @OneToMany(mappedBy = "userInfo")
+    @JsonIgnore
+    private List<Post> postList;
 
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    @OneToMany(mappedBy = "follower")
-    private List<Connections> connections;
-
-    @OneToMany(mappedBy = "followed")
-    private List<Connections> following;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "reportId")
     private Reports report;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Notifications> notifications;
 
     //These columns are needed by the admin side
     @Temporal(TemporalType.TIMESTAMP)
@@ -94,4 +100,5 @@ public class UserInfo {
     public void prePersist() {
         this.createdAt = new java.util.Date(); // Automatically set the creation date before persisting
     }
+
 }

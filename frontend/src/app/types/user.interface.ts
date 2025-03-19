@@ -3,7 +3,7 @@ import { SubjectSelection } from "./grade-selection.interface";
 import { PostInterface } from "./postInterface.interface";
 
 export interface User {
-  id?: number;
+  id: number;
   firstName?: string;
   lastName?: string;
   bio?: string;

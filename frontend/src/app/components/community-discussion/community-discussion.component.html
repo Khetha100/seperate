@@ -20,7 +20,7 @@
         <div class="clearfix ">
           <div class="message received">
             <p class="child">{{ item.content }}</p>
-            <img (click)="deleteMessageClicked(item.id)" class="trash" src="icons/trash.svg" />
+            <!-- <img (click)="deleteMessageClicked(item.id)" class="trashReceived" src="icons/trash.svg" /> -->
           </div>
         </div>
       } @else {
@@ -28,7 +28,7 @@
         <div class="clearfix">
           <div class="message sent">
             <p class="child">{{ item.content }}</p>
-            <img (click)="deleteMessageClicked(item.id)" class="trash" src="icons/trash.svg" />
+            <!-- <img (click)="deleteMessageClicked(item.id)" class="trash" src="icons/trash.svg" /> -->
           </div>
         </div>
       }

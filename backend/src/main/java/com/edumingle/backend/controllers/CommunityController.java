@@ -69,7 +69,7 @@ public class CommunityController {
             HttpServletRequest request,
             HttpServletResponse response
     ) {
-        System.out.println(community);
+//        System.out.println(community);
 
         HttpSession session = request.getSession(false);
         if (session != null) {

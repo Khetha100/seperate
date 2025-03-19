@@ -20,6 +20,7 @@ import { CommentsService } from '../../services/comments.service';
 import { CommentsInterface } from '../../types/comments.interface';
 import { User } from '../../types/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { DeleteModalComponent } from '../../components/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-home-page',
@@ -33,6 +34,7 @@ import { AuthService } from '../../services/auth.service';
     ReportPostComponent,
     MatSnackBarModule,
     CommonModule,
+    DeleteModalComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css',
@@ -40,17 +42,17 @@ import { AuthService } from '../../services/auth.service';
 export class HomePageComponent implements OnInit {
   postForm: FormGroup;
 
+
   // addContentService:AddContentService;
 
   constructor(
     private formBuilder: FormBuilder,
-    private postService: PostService,
+    public postService: PostService,
     private addContentService: AddContentService,
     private snackBar: MatSnackBar,
-    private comments: CommentsService,
+    public comments: CommentsService,
     public reportService: ReportService,
-    public authService:AuthService)
-   {
+    public authService: AuthService) {
     this.postForm = this.formBuilder.group({
       postContent: [''],
     });
@@ -59,14 +61,17 @@ export class HomePageComponent implements OnInit {
     this.addContentService.uuidValue = `${uuid.v4().toLowerCase()}`;
     this.postService.getPosts().subscribe((data) => {
       console.log(data);
-      this.posts = data;
+      this.postService.posts = data;
 
     });
+
+    this.postService.loggedUserId = Number(localStorage.getItem('id'))
     // if(localStorage.getItem('id')){
     this.authService.getUserById(Number(localStorage.getItem('id'))).subscribe((user) => {
-        console.log(user);
-        this.authService.userData = user;
-      });
+      console.log(user);
+      this.authService.userData = user;
+    });
+    console.log(this.authService.userData.imageUrl)
     // }
 
   }
@@ -78,7 +83,7 @@ export class HomePageComponent implements OnInit {
 
   userProfileData: any = null;
 
-  posts: PostInterface[] = [];
+
 
 
   // userName: string = 'Sino Fipaza';
@@ -113,7 +118,7 @@ export class HomePageComponent implements OnInit {
       this.postService.addPost(postInterface).subscribe(
         (data) => {
           console.log('Post submitted:', data);
-          this.posts.unshift(data);
+          this.postService.posts.unshift(data);
 
           this.snackBar.open('Post submitted successfully!', 'Close', {
             duration: 3000,
@@ -155,41 +160,50 @@ export class HomePageComponent implements OnInit {
   icon2: string = 'icons/likedHeart.svg';
   clickedPicture: boolean = false;
   likeCount: number = 0;
-  
-  setClickedUserId(id:number) {
-    this.authService.clickedUserId = id;
-  }
+
+
 
   OnClick() {
     this.clickedPicture = !this.clickedPicture;
     this.icon = this.clickedPicture ? this.icon2 : 'icons/heart.svg';
     this.likeCount += this.clickedPicture ? 1 : -1;
-    const commentUpdate: CommentsInterface = {
-      name: '',
-      description: 'Liked your post!',
-      numberOfLikes: this.likeCount,
-      date: new Date(),
-    };
-    this.comments.putLikes(commentUpdate).subscribe((data) => {
-      console.log(data);
-    });
+    if (this.comments.clickedCommentPost.id) {
+
+
+      const commentUpdate: CommentsInterface = {
+        name: '',
+        postId: this.comments.clickedCommentPost.id,
+        userId: Number(localStorage.getItem('id')),
+        description: 'Liked your post!',
+        numberOfLikes: this.likeCount,
+        date: new Date(),
+      };
+      this.comments.putLikes(commentUpdate).subscribe((data) => {
+        console.log(data);
+      });
+    }
   }
   getTimDiff(time: Date): string {
-    const diffTime = Math.abs(new Date(time).getTime() - new Date().getTime());
-    const timeDiff = Math.ceil(diffTime / (1000 * 60) - 1);
-    const timeDiffrnc = Math.ceil(diffTime / (1000 * 60 * 60) - 1);
-    const timeDiffrence = Math.ceil(diffTime / (1000 * 60 * 60 * 24) - 1);
 
-    if (timeDiff < 60) {
-      return timeDiff + 'm';
-    } else if (timeDiff > 60 && timeDiffrnc < 24) {
-      return timeDiffrnc + 'h';
-    } else {
-      return timeDiffrence + 'd';
+    const currentTimeInSA = new Date();
+    currentTimeInSA.setHours(currentTimeInSA.getHours() - 2);
+
+    const diffTime = Math.abs(new Date(time).getTime() - currentTimeInSA.getTime());
+
+    const timeDiffInMinutes = Math.ceil(diffTime / (1000 * 60));
+    const timeDiffInHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    const timeDiffInDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (timeDiffInMinutes < 60) {
+      return timeDiffInMinutes + 'm';
+    }
+    else if (timeDiffInHours < 24) {
+      return timeDiffInHours + 'h';
+    }
+    else {
+      return timeDiffInDays + 'd';
     }
   }
 
-  getReoprtedPostId(postId:number) {
-    this.reportService.reportPostId = postId;
-  }
+
 }

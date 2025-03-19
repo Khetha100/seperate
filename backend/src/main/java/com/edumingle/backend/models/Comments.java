@@ -1,5 +1,6 @@
 package com.edumingle.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +15,15 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer user_id;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private UserInfo user;
+
     private String name;
     private String description;
     private Long numberOfLikes;
     private LocalDateTime timePosted;
+    private Integer postsId;
 
     @ManyToOne
     @JoinColumn(name = "postId")

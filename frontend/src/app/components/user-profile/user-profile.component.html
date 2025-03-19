@@ -18,7 +18,7 @@
   >
     <img
       class="profile-picture object-cover object-center h-32"
-      [src]="userProfileData?.profileImage || 'default-img-2.png'"
+      [src]="userProfileData?.imageUrl || 'default-img-2.png'"
       alt=""
     />
   </div>
@@ -83,7 +83,7 @@
   </div>
 
   <!-- badges icon -->
-  <div class="badges-container text-center flex justify-center gap-2 mt-2">
+  <div *ngIf="userProfileData"   class="badges-container text-center flex justify-center gap-2 mt-2">
     <img
       class="badges left-228 overflow-visible"
       width="20"
@@ -92,9 +92,9 @@
       alt="badges"
       (click)="goToBadgesPage()"
     />
-    <h1 class="badges-text text-gray-400 text-xs" (click)="goToBadgesPage()">
+    <!-- <h1 class="badges-text text-gray-400 text-xs" (click)="goToBadgesPage()">
       {{ userProfileData?.badges.length || 0 }} badges
-    </h1>
+    </h1> -->
   </div>
 
   <p class="bio-text text-gray-500 text-center text-xs mt-5"></p>
@@ -190,6 +190,34 @@
 </div> -->
 
 <div *ngFor="let post of userProfileData?.posts">
+  <!-- Post Icons (Like and Comment) -->
+  <div class="posts-icons flex gap-6 items-center">
+    <div class="flex items-center gap-1">
+      <img class="like-icon w-4 h-4" src="Like.svg" alt="Like" />
+      <span>{{ post?.postLikes?.length || 0 }}</span> <!-- Accessing likes for each post -->
+    </div>
+    <div class="flex items-center gap-1">
+      <img class="comment-icon w-4 h-4" src="comment.svg" alt="Comment" />
+      <span>{{ post?.comments?.length || 0 }}</span> <!-- Accessing comments for each post -->
+    </div>
+  </div>
+
+  <!-- Time posted -->
+  <span class="time-posted text-gray-300 text-xs">
+    {{ post?.date || 'Just now' }}
+  </span>
+
+  <!-- Displaying Comments -->
+  <div *ngFor="let comment of post?.comments">
+    <div class="comment">
+      <!-- Displaying the description (comment content) -->
+      <p>{{ comment?.description }}</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div *ngFor="let post of userProfileData?.posts">
   <div class="posts-icons flex gap-6 items-center">
     <div class="flex items-center gap-1">
       <img class="like-icon w-4 h-4" src="Like.svg" alt="Like" />
@@ -204,4 +232,4 @@
     class="time-posted text-gray-300 text-xs"
     >{{ userProfileData?.posts?.[0]?.timePosted || 'Just now' }}</span
   >
-</div>
+</div> -->

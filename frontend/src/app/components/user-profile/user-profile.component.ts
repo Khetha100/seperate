@@ -1,35 +1,32 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from "../navbar/navbar.component";
-import { InsideNavComponent } from "../inside-nav/inside-nav.component";
-import { ReportPostComponent } from "../report-post/report-post.component";
+import { NavbarComponent } from '../navbar/navbar.component';
+import { InsideNavComponent } from '../inside-nav/inside-nav.component';
+import { ReportPostComponent } from '../report-post/report-post.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ConnectionService } from '../../services/connection-service.service';
 import { ProfileDataService } from '../../services/profile-data.service';
 import { User } from '../../types/user.interface';
 import { ActivatedRoute } from '@angular/router';
+import { PostInterface } from '../../types/postInterface.interface';
+import { PostService } from '../../services/post.service';
 
 // import { ReportData } from '../../types/reportData.interface';
-
 
 @Component({
   selector: 'app-user-profile',
   imports: [CommonModule, InsideNavComponent],
   templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css'
+  styleUrl: './user-profile.component.css',
 })
 export class UserProfileComponent implements OnInit {
-
-
-
-  constructor( private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private connectionService: ConnectionService,
     private profileDataService: ProfileDataService,
-    // private connectionService: ConnectionService
-   ) {}
+    private postService: PostService
+  ) {}
 
   //report and its toast message
   isReportFormVisible = false;
@@ -42,12 +39,14 @@ export class UserProfileComponent implements OnInit {
   toastMessage = '';
 
   receiverId: number = 0;
-  receiverName: string = "";
+  receiverName: string = '';
 
   user: User | null = null;
 
   // userProfileData: User | null = null; // store the profile data
-  userProfileData: any = null; // store the profile data
+  userProfileData: User | null = null;
+
+  userPosts: PostInterface[] = [];
 
   connections: any[] = [];
   userId: string | null = null;
@@ -55,63 +54,67 @@ export class UserProfileComponent implements OnInit {
   // toastMessage: string = 'Connection Request Sent';
 
   ngOnInit(): void {
-
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.userId = params.get('userId'); //this gets the userId from the URL
-      console.log("UserId from the URL: " + this.userId);
+      console.log('UserId from the URL: ' + this.userId);
       // this.loadUserProfile();
 
-
       //this calls the service func to fetch data from the database
-      if (this.userId){
+      if (this.userId) {
         this.loadUserProfile(this.userId);
+        // this.loadUserPosts(this.userId);
       }
-
-      
     });
-
-
-    
-
-    // this.authService.currentUser.subscribe(user => {
-    //   this.user = user;
-
-      // this.userId = this.authService.getUserId();
-      // Fetch the user's connections
-    //   this.connectionService.getUserConnections(this.userId).subscribe(connections => {
-    //     this.connections = connections;
-    //   });
-    // });
   }
-
 
   //this function fetches data from the profileDataService that we injected
   // and when we get the data, it is stored in userProfileData
-  loadUserProfile(userId: string){
-    this.profileDataService.getUserProfile(userId) // Fetch the data from the backend
-      .subscribe(data => {
-        this.userProfileData = data; // Assign the data to the component
-        console.log(data.bio);
-      }, error => {
-        console.error('Error fetching user data:', error); // Handle any errors
-      });
+  loadUserProfile(userId: string) {
+    this.profileDataService
+      .getUserProfile(userId) // Fetch the data from the backend
+      .subscribe(
+        (data) => {
+          this.userProfileData = data; // Assign the data to the component
+          console.log(data.bio);
+
+          //after the profile is loaded, fetch th euser's posts
+          this.loadUserPosts(userId)
+        },
+        (error) => {
+          console.error('Error fetching user data:', error);
+        }
+      );
   }
 
+  //loads the posts
+  loadUserPosts(userId: string): void {
+    this.postService.getUserPosts(userId).subscribe(
+      (posts) => {
+        this.userPosts = posts;
+        console.log('User Posts:', posts);
+      },
+      (error) => {
+        console.error('Error fetching user posts:', error);
+      }
+    );
+  }
 
-//function to open the report modal
-  openReportPopUp(){
+  //function to open the report modal
+  openReportPopUp() {
     this.isReportFormVisible = true;
   }
 
-//function to report post, show the toast message
-  reportPost(){
+  //function to report post, show the toast message
+  reportPost() {
     this.isReportFormVisible = false;
     console.log('reported');
-    this.showToast('Thank you for your feedback! We take reports seriously and will review this content shortly.');
+    this.showToast(
+      'Thank you for your feedback! We take reports seriously and will review this content shortly.'
+    );
   }
 
   //function to show the toast message after reporting
-  showToast(message: string){
+  showToast(message: string) {
     this.toastMessage = message;
     console.log('reported without message');
     this.isToastVisible = true;
@@ -136,10 +139,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   //connection modal closes
-  closeModal(){
+  closeModal() {
     this.isModalVisible = false;
   }
-
 
   //function to add or connect with a user
   addConnection(): void {
@@ -156,20 +158,23 @@ export class UserProfileComponent implements OnInit {
     // );
   }
 
-  goToBadgesPage(){
+  goToBadgesPage() {
     console.log('Going to badges page');
     this.router.navigate(['/badges']);
   }
 
   //share your profile or get alink to your profile
-  copyLinkToProfile(){
+  copyLinkToProfile() {
     const profileLink = window.location.href;
-    navigator.clipboard.writeText(profileLink).then(() => {
-      console.log('Link copied to clipboard');
-      this.showToast('Link copied to clipboard!');
-    }).catch(err => {
-      console.error('Failed to copy link:', err);
-      this.showToast('Failed to copy link to clipboard.');
-    });
+    navigator.clipboard
+      .writeText(profileLink)
+      .then(() => {
+        console.log('Link copied to clipboard');
+        this.showToast('Link copied to clipboard!');
+      })
+      .catch((err) => {
+        console.error('Failed to copy link:', err);
+        this.showToast('Failed to copy link to clipboard.');
+      });
   }
 }

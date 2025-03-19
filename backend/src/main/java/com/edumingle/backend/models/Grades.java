@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,5 +22,5 @@ public class Grades {
             joinColumns = @JoinColumn(name = "gradeId"),  // Foreign key to the Grades entity
             inverseJoinColumns = @JoinColumn(name = "userId")  // Foreign key to the UserInfo entity
     )
-    private List<UserInfo> users;
+    private Set<UserInfo> users;
 }

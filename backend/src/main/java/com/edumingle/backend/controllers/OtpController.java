@@ -4,7 +4,6 @@ import com.edumingle.backend.dtos.ForgotPasswordDTO;
 import com.edumingle.backend.dtos.OtpResponseDTO;
 import com.edumingle.backend.dtos.PasswordResetDTO;
 import com.edumingle.backend.dtos.RequestDetailsDTO;
-import com.edumingle.backend.models.UserInfo;
 import com.edumingle.backend.services.OtpService;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;

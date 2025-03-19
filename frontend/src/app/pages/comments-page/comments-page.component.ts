@@ -10,22 +10,33 @@ import * as uuid from 'uuid';
 import { CommentsInterface } from '../../types/comments.interface';
 import { User } from '../../types/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { PostInterface } from '../../types/postInterface.interface';
+import { PostService } from '../../services/post.service';
+import { DeleteModalComponent } from '../../components/delete-modal/delete-modal.component';
 
 @Component({
   selector: 'app-comments-page',
-  imports: [CommonModule, RouterLink, ReportPostComponent, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReportPostComponent, ReactiveFormsModule, DeleteModalComponent],
   templateUrl: './comments-page.component.html',
   styleUrl: './comments-page.component.css',
 })
 export class CommentsPageComponent {
   commentForm: FormGroup;
+  item: PostInterface = {
+    imageUrl: '',
+    name: '',
+    description: '',
+    date: new Date(),
+    userInfoId: 0
+  }
 
   constructor(
     private formBuilder: FormBuilder,
-    private commentsService: CommentsService,
+    public commentsService: CommentsService,
     private addContentService: AddContentService,
     private snackBar: MatSnackBar,
-    public authService:AuthService
+    public authService: AuthService,
+    public postService: PostService
   ) {
     this.commentForm = this.formBuilder.group({
       commentContent: [''],
@@ -33,11 +44,15 @@ export class CommentsPageComponent {
   }
   comment: CommentsInterface[] = [];
   ngOnInit(): void {
+    this.item = this.commentsService.clickedCommentPost;
     this.addContentService.uuidValue = `${uuid.v4().toLowerCase()}`;
-    this.commentsService.getComments().subscribe((data) => {
-      console.log(data);
-      this.comment = data;
-    });
+    if(this.item.id){
+      this.commentsService.getComments(this.item.id).subscribe((data) => {
+        console.log(data);
+        this.comment = data;
+      });
+    }
+
     this.authService.getUserById(Number(localStorage.getItem('id'))).subscribe((user) => {
       console.log(user);
       this.authService.userData = user;
@@ -45,12 +60,12 @@ export class CommentsPageComponent {
   }
 
   // userId!: number;
-    receiverId: number = 0;
-    receiverName: string = "";
-  
-    user: User | null = null;
-  
-    userProfileData: any = null;
+  receiverId: number = 0;
+  receiverName: string = "";
+
+  user: User | null = null;
+
+  userProfileData: any = null;
 
   isIconActive: boolean = false;
   location: any;
@@ -69,20 +84,24 @@ export class CommentsPageComponent {
     // console.log("new comment");
     // }
 
-    const commentsInterface: CommentsInterface = {
-      // id: number,
-      name: this.authService.userData.firstName +
-      ' ' +this.authService.userData.lastName,
-      description: newComment,
-      numberOfLikes: 0,
-      date: new Date(),
-    };
+    if (this.commentsService.clickedCommentPost.id) {
+      const commentsInterface: CommentsInterface = {
+        // id: number,
+        name: this.authService.userData.firstName +
+          ' ' + this.authService.userData.lastName,
+        postId: this.commentsService.clickedCommentPost.id,
+        userId: Number(localStorage.getItem('id')),
+        description: newComment,
+        numberOfLikes: 0,
+        date: new Date(),
+      };
 
-    this.comment.push(commentsInterface);
-    this.commentsService.addComments(commentsInterface).subscribe((data) => {
-      console.log(data);
-      this.comment.unshift(data);
-    });
+      // this.comment.push(commentsInterface);
+      this.commentsService.addComments(commentsInterface).subscribe((data) => {
+        console.log(data);
+        this.comment.unshift(data);
+      });
+    }
   }
 
   icon: string = 'icons/heart.svg';

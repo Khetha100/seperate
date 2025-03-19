@@ -177,6 +177,7 @@ export class SignupComponent {
 
 
       const user: User = {
+        id: 1,
         firstName: this.signupForm.value.firstName,
         lastName: this.signupForm.value.lastName,
         phone: this.signupForm.value.phone,

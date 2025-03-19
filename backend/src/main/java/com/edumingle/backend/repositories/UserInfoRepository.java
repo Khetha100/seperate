@@ -16,9 +16,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     @Query("Select DISTINCT c from UserInfo c where c.firstName iLIKE %:name%")
     List<UserInfo> findByFirstNameContain(String name);
 
-
     UserInfo findById(Long userId);
-
 
     boolean existsByPhone(String phone);
 
@@ -26,5 +24,10 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     List<UserInfo> findByFirstNameOrLastNameLikeIgnoreCase(String firstName, String lastName);
 }
+
+
+
+    //thistells jpa to find posts where the userInfo.id matches the provided userID
+//    List<Post> findByUserInfo_Id(Long userId);}
 
 

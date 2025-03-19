@@ -8,22 +8,11 @@ export interface PostInterface {
     description: string;
     reports?: Report[];
     postLikes?: LikeInterface[];
-    date: Date;
     userInfo?: User;
     userInfoId: number;
     comments?: CommentsInterface[];
+    date: Date;
 }
-
-
-// id?: number;
-//   title: string;
-//   description: string;
-//   subscriptionChannel?: string;
-//   communityId?: number;
-//   discussionId: number;
-//   userInfoId?: number;
-//   community?: Community;
-//   userInfo?: User;
 
 export interface LikeInterface {
   id?: number;

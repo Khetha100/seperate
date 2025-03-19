@@ -13,6 +13,7 @@ import { PostInterface } from '../../types/postInterface.interface';
 import { PostService } from '../../services/post.service';
 import { AddContentService } from '../../services/add-content.service';
 import * as uuid from 'uuid';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +31,8 @@ export class NavbarComponent {
     private formBuilder: FormBuilder,
     private postService: PostService,
     public addContentService: AddContentService,
-    public authService:AuthService
+    public authService:AuthService,
+    public homeService: HomeService
   ) {
     this.postForm = this.formBuilder.group({
       postContent: ['', Validators.required],
@@ -39,10 +41,14 @@ export class NavbarComponent {
 
   ngOnInit(): void {
     this.addContentService.uuidValue = `${uuid.v4().toLowerCase()}`;
-    this.postService.getPosts().subscribe((data) => {
-      console.log(data);
-      this.posts = data;
-    });
+    // this.postService.getPosts().subscribe((data) => {
+    //   console.log(data);
+    //   this.posts = data;
+    // });
+    this.homeService.getRandomPosts().subscribe((posts) => {
+      console.log(posts);
+      this.posts = posts;
+    })
   }
   togglePopup() {
     this.isPopupVisible = !this.isPopupVisible;

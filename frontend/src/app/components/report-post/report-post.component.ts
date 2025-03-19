@@ -43,7 +43,6 @@ export class ReportPostComponent {
 
   closeReportPopUp() {
     this.resetForm();
-
     this.isReportFormVisible = false;
   }
 

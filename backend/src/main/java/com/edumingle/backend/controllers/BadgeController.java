@@ -31,13 +31,13 @@ public class BadgeController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/award/{userId}")
-    public ResponseEntity<Badges> awardBadge(
-            @PathVariable Long userId,
-            @RequestBody BadgeDTO badgeDTO
-    ) {
-        Badges badge = badgeService.awardBadge(userId, badgeDTO);
-        return ResponseEntity.ok(badge);
-    }
+//    @PostMapping("/award/{userId}")
+//    public ResponseEntity<Badges> awardBadge(
+//            @PathVariable Long userId,
+//            @RequestBody BadgeDTO badgeDTO
+//    ) {
+//        Badges badge = badgeService.awardBadge(userId, badgeDTO);
+//        return ResponseEntity.ok(badge);
+//    }
 }
 

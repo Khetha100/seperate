@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,14 +19,13 @@ public class Community implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "community_id")
+    @Column(name = "communityId")
     private Long id;
 
     private String name;
-
     private String description;
 
-    @Column(name="is_private")
+    @Column(name="isPrivate")
     private String pubOrPriv;
 
 //    @ManyToMany
@@ -45,11 +44,10 @@ public class Community implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "userId")  // The foreign key in the join table for the UserInfo entity
     )
     @JsonIgnore
-    private List<UserInfo> users;
+    private Set<UserInfo> users;
 
 
     private int communityCreatorId;
-
     private String communityPicture;
 
     private int communityMembersNumber;

@@ -33,7 +33,9 @@
             <br />
           </div>
           <div class="arno-greeff">{{item.firstName}}  {{item.lastName}}</div>
+          @if(item.id == this.loggedUserId && !isAdmin()){
           <button class="visitbtn" routerLink="/profile">connect</button>
+          }
           @if(item.id!=this.loggedUserId && isAdmin()){
               <button class="connectBtn" (click)="removeCommunityMember(item.id)">Remove</button>
           }

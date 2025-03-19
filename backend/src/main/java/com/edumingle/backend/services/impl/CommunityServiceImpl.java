@@ -42,7 +42,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public List<Community> getAllCommunities() {
         List<Community> listOfCommunities = communityRepository.findAll();
-        System.out.println(listOfCommunities);
+//        System.out.println(listOfCommunities);
         return listOfCommunities;
     }
 
@@ -102,7 +102,7 @@ public class CommunityServiceImpl implements CommunityService {
         //        return communityUserRoleRepository.findByCommunityId(id);
         List<UserInfo> listOfUsers = new ArrayList<>();
         List<CommunityUserRole> listOfUserId = communityUserRoleRepository.findByCommunityId(id);
-        System.out.println(listOfUserId);
+//        System.out.println(listOfUserId);
 
         for(CommunityUserRole i: listOfUserId){
 
@@ -120,7 +120,7 @@ public class CommunityServiceImpl implements CommunityService {
                 distinctComUserRole.add(distinct);
             }
         }
-        System.out.println(distinctComUserRole);
+//        System.out.println(distinctComUserRole);
         return distinctComUserRole;
     }
 

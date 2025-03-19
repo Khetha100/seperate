@@ -1,7 +1,22 @@
+# Global Variables
+@baseUrl = http://localhost:8080/api/v1
+@adminUrl = http://localhost:8080/api/admin
+@postId = 4
+@userId = 1
+@communityId = 2
+@discussionId = 1
+@commentId = 2
+@profileId = 1
+@searchValue = new
+@followerId = 1
+@followedId = 2
+@connectionId = 2
+@communityName = "Math Merchants"
+
 # AUTH CONTROLLER ENDPOINTS
 
-# Registers a new teacher with the provided details including saceNumber
-POST http://localhost:8080/api/v1/auth/signup
+### Registers a new teacher
+POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 Accept: application/json
 
@@ -14,10 +29,8 @@ Accept: application/json
   "role": "TEACHER"
 }
 
-#####
-
-# Registers a new student with the provided details
-POST http://localhost:8080/api/v1/auth/signup
+### Registers a new student
+POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 Accept: application/json
 
@@ -29,10 +42,8 @@ Accept: application/json
   "role": "STUDENT"
 }
 
-#####
-
-# Logs in a user whether student or teacher with phone and password.
-POST http://localhost:8080/api/v1/auth/signin
+### Logs in a user
+POST {{baseUrl}}/auth/signin
 Content-Type: application/json
 Accept: application/json
 
@@ -41,50 +52,33 @@ Accept: application/json
   "password": "666666"
 }
 
-#####
-
-# Logs out user
-GET http://localhost:8080/api/v1/auth/signout
+### Logs out a user
+GET {{baseUrl}}/auth/signout
 Accept: application/json
-
-#####
 
 # GRADES AND SUBJECTS CONTROLLER ENDPOINTS
 
-# Fetches all of the grades
-GET http://localhost:8080/api/v1/grades
+### Fetch all grades
+GET {{baseUrl}}/grades
 Accept: application/json
 
-#####
-
-# Fetch a specific grade by Id
-@id = 2
-
-GET http://localhost:8080/api/v1/grades/{{id}}
+### Fetch a specific grade
+@gradeId = 2
+GET {{baseUrl}}/grades/{{gradeId}}
 Accept: application/json
 
-#####
-
-# Fetch subjects by grade
-@gradeId = 1
-
-GET http://localhost:8080/api/v1/subjects/{{gradeId}}
+### Fetch subjects by grade
+GET {{baseUrl}}/subjects/{{gradeId}}
 Accept: application/json
-
-
 
 # POST CONTROLLER ENDPOINTS
 
-#####
-
-# Get all posts
-GET http://localhost:8080/api/v1/posts
+### Get all posts
+GET {{baseUrl}}/posts
 Accept: application/json
 
-#####
-
-# Create a new post
-POST http://localhost:8080/api/v1/posts
+### Create a new post
+POST {{baseUrl}}/posts
 Content-Type: application/json
 Accept: application/json
 
@@ -95,33 +89,31 @@ Accept: application/json
   "numberOfLikes": 1000
 }
 
-#####
-@postId = 3
-
-# Delete a post
-DELETE http://localhost:8080/api/v1/posts/{{postId}}
+### Delete a post
+DELETE {{baseUrl}}/posts/{{postId}}
 Accept: application/json
 
-
-###
-@searchValue = new
-# Search a post
-GET http://localhost:8080/api/v1/posts/search?keyword={{searchValue}}
+### Search a post
+GET {{baseUrl}}/posts/search?keyword={{searchValue}}
 Accept: application/json
 
-
-# COMMUNITIES CONTROLLER
-
-#####
-
-# Get all communities in the database
-GET http://localhost:8080/api/v1/communities
+### Like a post
+POST {{baseUrl}}/posts/{{postId}}/likes?userId={{userId}}
+Content-Type: application/json
 Accept: application/json
 
-#####
+### Unlike a post
+DELETE {{baseUrl}}/posts/{{postId}}/likes?userId={{userId}}
+Accept: application/json
 
-# Create a new community
-POST http://localhost:8080/api/v1/communities
+# COMMUNITIES CONTROLLER ENDPOINTS
+
+### Get all communities
+GET {{baseUrl}}/communities
+Accept: application/json
+
+### Create a new community
+POST {{baseUrl}}/communities
 Content-Type: application/json
 Accept: application/json
 
@@ -135,15 +127,13 @@ Accept: application/json
   "joined": true
 }
 
-#####
-
-# Update community details
-PUT http://localhost:8080/api/v1/communities/community
+### Update community details
+PUT {{baseUrl}}/communities/community
 Content-Type: application/json
 Accept: application/json
 
 {
-  "id": 1,
+  "id": {{communityId}},
   "name": "Mathematics Merchants",
   "description": "This group is meant for the new grade 5 learners that have a problem with multiplication and addition",
   "pubOrPriv": "private",
@@ -153,30 +143,21 @@ Accept: application/json
   "joined": false
 }
 
-#####
-@communitiesId = 1
-
-# Get a specific community
-GET http://localhost:8080/api/v1/communities/{{communitiesId}}
+### Get a specific community
+GET {{baseUrl}}/communities/{{communityId}}
 Accept: application/json
 
-#####
-
-# Get community members
-@communityId = 2
-
-GET http://localhost:8080/api/v1/communities/members/{{communityId}}
+### Get community members
+GET {{baseUrl}}/communities/members/{{communityId}}
 Accept: application/json
 
-#####
-
-# Add a community member
-POST http://localhost:8080/api/v1/communities/members
+### Add a community member
+POST {{baseUrl}}/communities/members
 Content-Type: application/json
 Accept: application/json
 
 {
-  "id": 1,
+  "id": {{userId}},
   "name": "Maboku",
   "surname": "Seimela",
   "bio": "A++ student with his head on his shoulders",
@@ -185,49 +166,26 @@ Accept: application/json
   "password": "123456"
 }
 
-#####
-
-# Get community user role?
-GET http://localhost:8080/api/v1/communities/members
+### Delete a community member
+DELETE {{baseUrl}}/communities/members/{{userId}}
 Accept: application/json
 
-#####
-
-# Delete a community member
-@communityUserRoleId = 1
-
-DELETE http://localhost:8080/api/v1/communities/members/{{communityUserRoleId}}
+### Search for a community
+GET {{baseUrl}}/communities/search?keyword={{communityName}}
 Accept: application/json
-
-#####
-@value = "Math Merchants"
-
-# Search functionality for a community
-GET http://localhost:8080/api/v1/communities/search?keyword={{value}}
-Accept: application/json
-
-
 
 # DISCUSSIONS CONTROLLER ENDPOINTS
 
-#####
-
-# Get all discussions
-GET http://localhost:8080/api/v1/discussions
+### Get all discussions
+GET {{baseUrl}}/discussions
 Accept: application/json
 
-#####
-
-# Get a specific discussion
-@discussion = 1
-
-GET http://localhost:8080/api/v1/discussions/{{discussion}}
+### Get a specific discussion
+GET {{baseUrl}}/discussions/{{discussionId}}
 Accept: application/json
 
-#####
-
-# Create a new discussion
-POST http://localhost:8080/api/v1/discussions
+### Create a new discussion
+POST {{baseUrl}}/discussions
 Content-Type: application/json
 Accept: application/json
 
@@ -236,25 +194,18 @@ Accept: application/json
   "description": "The multiplications table is giving the grade 4 learners a problem"
 }
 
-#####
-
-GET http://localhost:8080/api/v1/discussions/search
+### Search discussions
+GET {{baseUrl}}/discussions/search
 Accept: application/json
-
-#####
-
-# Get all comments
-GET http://localhost:8080/api/v1/comments
-Accept: application/json
-
-
 
 # COMMENTS CONTROLLER ENDPOINTS
 
-#####
+### Get all comments
+GET {{baseUrl}}/comments
+Accept: application/json
 
-# Create a new comment
-POST http://localhost:8080/api/v1/comments
+### Create a comment
+POST {{baseUrl}}/comments
 Content-Type: application/json
 Accept: application/json
 
@@ -264,18 +215,14 @@ Accept: application/json
   "description": "this is my comments controller"
 }
 
-#####
-@commentId = 2
-
-# Delete a comment
-DELETE http://localhost:8080/api/v1/comments/{{commentId}}
+### Delete a comment
+DELETE {{baseUrl}}/comments/{{commentId}}
 Accept: application/json
 
-#####
-@profileId = 1
+# PROFILE CONTROLLER ENDPOINTS
 
-# Update user profile
-PUT http://localhost:8080/api/v1/profile/{{profileId}}
+### Update user profile
+PUT {{baseUrl}}/profile/{{profileId}}
 Content-Type: application/json
 Accept: application/json
 
@@ -288,64 +235,63 @@ Accept: application/json
   "password": "654321"
 }
 
-
-
-###
-#####
-
-# CONNECTIONS CONTROLLER ENDPOINTS
-
-POST http://localhost:8080/api/v1/connections/connect
-Content-Type: application/json
+### Get a user's profile
+GET {{baseUrl}}/profiles/{{userId}}
 Accept: application/json
 
-###
-
-POST http://localhost:8080/api/v1/connections/accept
-Content-Type: application/json
+### Get all user profiles
+GET {{baseUrl}}/profiles
 Accept: application/json
 
-###
-
-POST http://localhost:8080/api/v1/connections/reject
-Content-Type: application/json
+### Get a user profile's posts
+GET {{baseUrl}}/profiles/{{userId}}/posts
 Accept: application/json
 
-###
-@userId = variable value
+# ADMIN CONTROLLER ENDPOINTS
 
-GET http://localhost:8080/api/v1/connections/{{userId}}/connections
+### Get reported content
+GET {{adminUrl}}/content/reported
 Accept: application/json
 
-# REPORT CONTROLLER ENDPOINTS
+### Get reported content count
+GET {{adminUrl}}/content/reported/count
+Accept: application/json
 
-#####
+### Get all donations
+GET {{adminUrl}}/donations
+Accept: application/json
 
-POST http://localhost:8080/api/v1/reports
+### Home Page
+GET {{baseUrl}}/home
+Accept: application/json
+
+### Follow someone
+POST {{baseUrl}}/follows/follow?followerId={{followerId}}&followedId={{followedId}}
+Accept: application/json
+
+### Unfollow someone
+DELETE {{baseUrl}}/follows/unfollow?followerId={{followerId}}&followedId={{followedId}}
+Accept: application/json
+
+### Get all followers
+GET {{baseUrl}}/follows/{{userId}}/followers
+Accept: application/json
+
+### Get all following
+GET {{baseUrl}}/follows/{{userId}}/followers
+Accept: application/json
+
+# NOTIFICATIONS CONTROLLER ENDPOINTS
+
+### Get all unread notifications
+GET {{baseUrl}}/notifications/{{userId}}
+Accept: application/json
+
+### Mark a notifications as read
+PATCH {{baseUrl}}/notifications/{{userId}}/read
 Content-Type: application/json
 Accept: application/json
 
 {
-  "reason": "OffensiveLanguage",
-  "description": "This person swore at me",
-  "status": "PENDING",
-  "user": {
-    "id": 1
-  }
+  "readStatus": true
 }
-
-
-###
-# ADMIN CONTROLLER ENDPOINTS
-GET http://localhost:8080/api/admin/content/reported
-Accept: application/json
-
-###
-GET http://localhost:8080/api/admin/content/reported/count
-Accept: application/json
-
-
-###
-# ADMIN DONATIONS CONTROLLER
-GET http://localhost:8080/api/admin/donations
-Accept: application/json

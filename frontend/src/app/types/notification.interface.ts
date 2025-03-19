@@ -1,9 +1,9 @@
+import { User } from "./user.interface";
+
 export interface Notifications {
     id?: any;
-    senderId: number;
-    receiverId: number;
-    date: Date;
-    readStatus: string;
-    notifictionType: string;
-
+    uderId: User;
+    message: string;
+    readStatus: boolean;
+    createdAt: Date;
 }

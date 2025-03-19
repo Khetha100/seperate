@@ -20,10 +20,69 @@ export class AddContentService {
   uploadTitle: string | undefined;
   uploadStatus: boolean | undefined;
 
+  profilePicture: string = '';
+
   constructor(
     private uploadService: UploadCloudinaryService,
     private http: HttpClient
   ) {}
+
+  uploadProfilePicture(file: File) {
+    const imageEnd = file.name.split('.')[file.name.split('.').length - 1];
+    console.log(file.name);
+    const signData = this.signuploadform();
+    const formData = new FormData();
+    formData.append('eager', 'c_pad,h_300,w_400|c_crop,h_200,w_260');
+    formData.append('folder', 'identification/NGA');
+    formData.append('public_id', this.uuidValue);
+    formData.append('file', file);
+    formData.append('api_key', signData.api_key);
+    formData.append('timestamp', signData.timestamp.toString());
+    formData.append('signature', signData.signature);
+    console.log(this.uuidValue);
+    console.log(formData);
+    this.profilePicture =
+      'https://res.cloudinary.com/dewxqftck/image/upload/v1739148627/identification/NGA/' +
+      this.uuidValue +
+      '.' +
+      imageEnd;
+    const url =
+      'https://api.cloudinary.com/v1_1/' +
+      environment.CLOUD_NAME +
+      '/image/upload';
+    this.isLoading = true;
+
+    this.http
+      .post(url, formData)
+      .pipe(map((x: any) => x.secure_url as string))
+      .subscribe({
+        next: (res) => {
+          this.identification = res;
+          this.uploadTitle = 'ID Uploaded';
+          this.uploadStatus = true;
+          from(
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully uploaded',
+              showConfirmButton: true,
+            })
+          );
+        },
+        error: (error) => {
+          this.isLoading = false;
+          from(
+            Swal.fire({
+              icon: 'error',
+              title: 'Please check your image and try again',
+              showConfirmButton: true,
+            })
+          );
+        },
+        complete: () => {
+          this.isLoading = false;
+        },
+      });
+  }
 
   uploadFile(file: File) {
     const imageEnd = file.name.split('.')[file.name.split('.').length - 1];

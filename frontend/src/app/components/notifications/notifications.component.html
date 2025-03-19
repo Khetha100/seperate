@@ -19,4 +19,10 @@
     </p>
   </div>
 </div>
+
+<div *ngFor="let notification of notifications">
+  <p>{{ notification.message }}</p>
+  <button (click)="markAsRead(notification.id)">Mark as Read</button>
+</div>
+
 <app-navbar></app-navbar>

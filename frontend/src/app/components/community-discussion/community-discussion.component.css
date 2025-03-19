@@ -33,7 +33,13 @@
   display: flex;
   justify-content: flex-start;
   width: fit-content;
-  margin-left: 0;
+  margin-left: 10px;
+}
+
+.trashReceived {
+  position:absolute;
+  left: 355px;
+
 }
 
 /* Sent messages (Right) */

@@ -19,4 +19,6 @@ public interface CommentsRepository extends JpaRepository<Comments, Long> {
             "LOWER(c.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(c.description) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Comments> searchComments(@Param("keyword") String keyword);
+
+    List<Comments> findByPostId(int id);
 }

@@ -66,6 +66,7 @@ export class AdminService {
   }
 
   getReportedPost(postId: number): Observable<PostInterface> {
+    console.log(postId)
     return this.http.get<PostInterface>(
       'http://localhost:8080/api/v1/posts/' + postId
     );
