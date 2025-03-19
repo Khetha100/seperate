@@ -1,14 +1,25 @@
 version: "3.9"
 services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_DB=EduMingleDB
+      - POSTGRES_PASSWORD=Siya@100
+      - POSTGRES_USER=Siyabonga
+    ports:
+      - "5432:5432"
   backend:
     build:
       context: ./backend
-    environment:
-      - MANAGEMENT_SECURITY_ENABLED=false
+      dockerfile: Dockerfile
     ports:
-      - "8081:8080"
-      - "9009:9009"
-    mem_limit: 300M
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/EduMingleDB
+      - SPRING_DATASOURCE_USERNAME=Siyabonga
+      - SPRING_DATASOURCE_PASSWORD=Siya@100
   frontend:
     build:
       context: ./frontend
@@ -17,3 +28,5 @@ services:
     links:
       - backend
   
+
+
