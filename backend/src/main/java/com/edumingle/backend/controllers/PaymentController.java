@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}, allowCredentials = "true")
 public class PaymentController {
     public PaymentController() {
         Stripe.apiKey = "sk_test_51QrDW5QvnqWgELKLuW9ZkUYcaTyzxqnEPoL55N4pD8j5BhWDpP14pZmeQo1Vpp6cnqXtk3t3xTmv5QFlNvlCSr1v00NtIA8PSc";
@@ -26,7 +26,7 @@ public class PaymentController {
             @RequestBody Map<String, String> request, HttpServletResponse httpServletResponse
     ) throws StripeException, IOException {
         try {
-            String YOUR_DOMAIN = "http://localhost:4200/";
+            String YOUR_DOMAIN = "http://localhost:4000/";
             String amount = request.get("amount");
 
             SessionCreateParams params = SessionCreateParams.builder()

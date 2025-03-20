@@ -17,7 +17,7 @@ import com.edumingle.backend.dtos.CommunityDiscussionDTO;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("/api/v1/discussions")
 public class DiscussionController {
     private final DiscussionServiceImpl discussionService;
@@ -44,7 +44,7 @@ public class DiscussionController {
         return ResponseEntity.ok(discussionService.getAllDiscussions());
     }
 
-    @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+    @CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
     @GetMapping("/{discussion}")
     public ResponseEntity<List<Discussion>> getAllCreatedDiscussionsOnACommunity(
             @PathVariable int discussion,
@@ -57,7 +57,7 @@ public class DiscussionController {
 
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(discussionService.getAllDiscussionsByCommunityId(discussion));

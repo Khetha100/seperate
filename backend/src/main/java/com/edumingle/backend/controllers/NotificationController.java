@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("/api/v1/notifications")
 public class NotificationController {
     private final NotificationServiceImpl notificationService;

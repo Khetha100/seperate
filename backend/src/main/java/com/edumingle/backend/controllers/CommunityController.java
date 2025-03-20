@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("/api/v1/communities")
 public class CommunityController {
 
@@ -57,7 +57,7 @@ public class CommunityController {
 
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return  ResponseEntity.ok(communityService.getAllCommunities());
@@ -76,7 +76,7 @@ public class CommunityController {
             String userId = (String) session.getAttribute("USER_ID").toString();
 
         }
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.addACommunity(community));
@@ -93,7 +93,7 @@ public class CommunityController {
             String userId = (String) session.getAttribute("USER_ID");
 
         }
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.editACommunity(community));
@@ -111,7 +111,7 @@ public class CommunityController {
 
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.getOneCommunity(id));
@@ -130,7 +130,7 @@ public class CommunityController {
 
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.getAllCommunityUsers(communityId));
@@ -148,7 +148,7 @@ public class CommunityController {
 
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.addMemberToCommunity(communityUserRole));
@@ -164,7 +164,7 @@ public class CommunityController {
             String userId = session.getAttribute("USER_ID").toString();
 
         }
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.getAllCommunityUserRole());
@@ -182,7 +182,7 @@ public class CommunityController {
 //            System.out.println("Session ID: " + session.getId());
 //            System.out.println("User ID: " + userId);
         }
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
 
         return ResponseEntity.ok(communityService.deleteCommunityMember(communityUserRoleId));
@@ -207,14 +207,14 @@ public class CommunityController {
 
     @PostMapping("search/community")
     public ResponseEntity<List<Community>> searcCommunity(@RequestBody SearchDTO searchDTO, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return ResponseEntity.ok(searchService.searchCommunity(searchDTO));
     }
 
     @GetMapping("/community/members/remove/{communityUserRoleId}")
     public ResponseEntity<CommunitySearchResponse> deleteCommunityMember(@PathVariable Integer communityUserRoleId, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return  ResponseEntity.ok(new CommunitySearchResponse(HttpStatus.OK,communityService.deleteCommunityMember(communityUserRoleId)));
     }
@@ -222,7 +222,7 @@ public class CommunityController {
 
     @GetMapping("/community/members/added/{communityUserId}")
     public ResponseEntity<UserInfo> getAddedUser(@PathVariable Integer communityUserId, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return ResponseEntity.ok(userInfoRepository.findById(communityUserId).orElse(null));
     }
@@ -230,14 +230,14 @@ public class CommunityController {
     @DeleteMapping("/community/{id}")
     public ResponseEntity<DeleteCommunityDTO> deleteCommunity(@PathVariable Long id, HttpServletResponse response){
 //        System.out.println("INSIDE THE DELETE MAPPING");
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return ResponseEntity.ok(communityService.deleteCommunity(id));
     }
 
     @PostMapping("/search/people")
     public ResponseEntity<List<UserInfo>> searchUser(@RequestBody SearchDTO searchDTO, HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return  ResponseEntity.ok(userInfoRepository.findByFirstNameContain(searchDTO.getUser()));
     }

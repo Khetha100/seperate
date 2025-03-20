@@ -12,7 +12,7 @@ import com.edumingle.backend.models.Subjects;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("/api/v1/subjects")
 public class SubjectController {
     private final SubjectServiceImpl subjectService;

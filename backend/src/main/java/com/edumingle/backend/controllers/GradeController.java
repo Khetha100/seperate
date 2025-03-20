@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("/api/v1/grades")
 public class GradeController {
     private final GradeServiceImpl gradeService;
@@ -39,7 +39,7 @@ public class GradeController {
             System.out.println("User ID: " + userId);
         }
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET");
         return gradeService.getAllGrades();
     }

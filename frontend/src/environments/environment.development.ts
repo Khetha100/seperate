@@ -1,5 +1,5 @@
 export const environment = {
-  SERVER: 'http://localhost:8080',
+  SERVER: 'http://localhost:8000',
   cloudinaryUrl: 'https://api.cloudinary.com/v1_1/cloud_name/dewxqftck/upload',
   CLOUD_NAME: 'dewxqftck',
   upload_preset: 'community',

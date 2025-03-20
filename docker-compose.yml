@@ -3,8 +3,8 @@ services:
     image: 'postgres:latest'
     environment:
       - POSTGRES_DB=EduMingleDB
-      - POSTGRES_PASSWORD=Siya@100
-      - POSTGRES_USER=Siyabonga
+      - POSTGRES_PASSWORD=Khetha100%
+      - POSTGRES_USER=postgres
     ports:
       - "5000:5432"
   backend:
@@ -17,15 +17,13 @@ services:
       - postgres
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/EduMingleDB
-      - SPRING_DATASOURCE_USERNAME=Siyabonga
-      - SPRING_DATASOURCE_PASSWORD=Siya@100
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=Khetha100%
   frontend:
     build:
       context: ./frontend
     ports:
       - "4000:4200"
-    links:
-      - backend
   
 
 

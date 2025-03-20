@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/adminAuth/dashboard")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4000")
 public class AdminController {
 
     @Autowired

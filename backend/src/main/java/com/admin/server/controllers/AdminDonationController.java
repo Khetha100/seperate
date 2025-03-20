@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin/donations")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 public class AdminDonationController {
 
     @Autowired

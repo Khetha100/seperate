@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm cache clean --force
 # Build angular application
 # RUN npm install -g npm@latest
-RUN npm install --save --legacy-peer-deps
+RUN npm install  --force --save
 
 # Copy the source code to the container
 COPY . .

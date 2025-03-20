@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/admin/analytics")
-@CrossOrigin
+@RequestMapping("/api/v1/admin/analytics")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 public class AdminAnalyticsController {
 
     @Autowired

@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.SequencedCollection;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4000", maxAge = 3600, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowCredentials = "true")
 @RequestMapping("api/v1/profile")
 public class ProfileController {
     private final UserInfoServiceImpl userInfoService;
@@ -56,7 +56,7 @@ public class ProfileController {
         }
 
         UserInfo updatedProfile = userInfoService.updateUserProfile(id, userInfo);
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return updatedProfile != null ? ResponseEntity.ok(updatedProfile) : ResponseEntity.notFound().build();
     }
@@ -70,7 +70,7 @@ public class ProfileController {
 
         UserDTO userDTO = new UserDTO(userInfo);
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         return ResponseEntity.ok(userDTO);
     }

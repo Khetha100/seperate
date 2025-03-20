@@ -68,7 +68,7 @@ export class AdminService {
   getReportedPost(postId: number): Observable<PostInterface> {
     console.log(postId)
     return this.http.get<PostInterface>(
-      'http://localhost:8080/api/v1/posts/' + postId
+      'http://localhost:8000/api/v1/posts/' + postId
     );
   }
 
@@ -87,24 +87,24 @@ export class AdminService {
   // Content Moderation
   getReportedContent(): Observable<ReportData[]> {
     return this.http.get<ReportData[]>(
-      'http://localhost:8080/api/admin/content/reported'
+      'http://localhost:8000/api/admin/content/reported'
     );
   }
 
   getReportedContentCount(): Observable<ReportData[]> {
     return this.http.get<ReportData[]>(
-      'http://localhost:8080/api/admin/content/reported/count'
+      'http://localhost:8000/api/admin/content/reported/count'
     );
   }
 
   deleteContent(id: number): Observable<void> {
     return this.http.delete<void>(
-      'http://localhost:8080/api/admin/content/report/delete'
+      'http://localhost:8000/api/admin/content/report/delete'
     );
   }
 
   deleteReportedPost(id: number) {
-    return this.http.delete<void>('http://localhost:8080/api/v1/posts/' + id);
+    return this.http.delete<void>('http://localhost:8000/api/v1/posts/' + id);
   }
 
   // User Management
@@ -125,7 +125,7 @@ export class AdminService {
 
   // Analytics
   getAnalyticsData(): Observable<any> {
-    return this.http.get(`http://localhost:8080/api/admin/analytics/userRoles`);
+    return this.http.get(`http://localhost:8000/api/v1/admin/analytics/userRoles`);
   }
 
   getNewUsersCount(startDate: string): Observable<number> {
@@ -137,7 +137,7 @@ export class AdminService {
   // Donations
   getDonations(): Observable<Donations[]> {
     return this.http.get<Donations[]>(
-      'http://localhost:8080/api/admin/donations'
+      'http://localhost:8000/api/admin/donations'
     );
   }
 

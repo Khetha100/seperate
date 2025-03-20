@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/adminAuth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4000")
 public class AdminUserController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class AdminUserController {
 
     @PostMapping("/users/{userId}/temporarily-delete")
     public ResponseEntity<Void> temporarilyDeleteUser(@PathVariable int userId) {
-        System.out.println("ABOUT TO DELETE A USER");
+//        System.out.println("ABOUT TO DELETE A USER");
         adminUserService.temporarilyDeleteUser(userId);
         return ResponseEntity.ok().build();
     }
