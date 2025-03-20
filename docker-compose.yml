@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   postgres:
     image: 'postgres:latest'
@@ -7,13 +6,13 @@ services:
       - POSTGRES_PASSWORD=Siya@100
       - POSTGRES_USER=Siyabonga
     ports:
-      - "5432:5432"
+      - "5000:5432"
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8000:8080"
     depends_on:
       - postgres
     environment:
@@ -24,7 +23,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "8080:8080"
+      - "4000:4200"
     links:
       - backend
   
