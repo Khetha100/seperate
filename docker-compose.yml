@@ -1,29 +1,19 @@
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - POSTGRES_DB=EduMingleDB
-      - POSTGRES_PASSWORD=Khetha100%
-      - POSTGRES_USER=postgres
-    ports:
-      - "5000:5432"
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8000:8080"
-    depends_on:
-      - postgres
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/EduMingleDB
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=Khetha100%
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://edumingledb_user:7tkQ7XyPOq6YuYmqVTTbnK4B2w7BQiXr@dpg-cvgs0btumphs73cvcggg-a.oregon-postgres.render.com/edumingledb
+      - SPRING_DATASOURCE_USERNAME=edumingledb_user
+      - SPRING_DATASOURCE_PASSWORD=7tkQ7XyPOq6YuYmqVTTbnK4B2w7BQiXr
   frontend:
     build:
       context: ./frontend
     ports:
       - "4000:4200"
-  
+
 
 
